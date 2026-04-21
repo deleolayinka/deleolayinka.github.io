@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moses Oyedele | Data Scientist and BI Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* THEME */
+[data-theme="light"]{
+  --bg:#F5F1E8;--bg-card:#FFFFFF;--bg-surface:#EDE8DC;--bg-nav:rgba(245,241,232,0.94);
+  --accent:#C94F2C;--ac-dim:rgba(201,79,44,.09);--ac-mid:rgba(201,79,44,.28);
+  --second:#1d7a8a;--sec-dim:rgba(29,122,138,.10);
+  --text:#1A1714;--muted:#7A7060;--rule:rgba(26,23,20,.10);
+  --card-hover:#FDFCFA;--tag-bg:rgba(201,79,44,.07);
+  --shadow:0 12px 48px rgba(26,23,20,.10);
+  --cs-bg:#1A1714;--cs-text:#EDE8DC;--cs-muted:#7A7060;
+  --rv-bg:#FFFFFF;
+}
+[data-theme="dark"]{
+  --bg:#030810;--bg-card:#09101f;--bg-surface:#0e1828;--bg-nav:rgba(3,8,16,.88);
+  --accent:#c9a84c;--ac-dim:rgba(201,168,76,.15);--ac-mid:rgba(201,168,76,.35);
+  --second:#2dd4f0;--sec-dim:rgba(45,212,240,.12);
+  --text:#eae6dc;--muted:#7a8799;--rule:rgba(234,230,220,.08);
+  --card-hover:#0e1828;--tag-bg:rgba(201,168,76,.10);
+  --shadow:0 12px 48px rgba(0,0,0,.45);
+  --cs-bg:#09101f;--cs-text:#eae6dc;--cs-muted:#7a8799;
+  --rv-bg:#09101f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.7;overflow-x:hidden;transition:background .4s,color .4s}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+[data-theme="dark"] body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+
+/* PROGRESS BAR */
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--accent),var(--second));z-index:2000;pointer-events:none;transition:width .1s linear}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:0 8%;height:68px;background:transparent;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+nav.scrolled{background:var(--bg-nav);border-color:var(--rule);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-logo{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.4rem;font-weight:400;color:var(--text);text-decoration:none;transition:color .3s}
+.nav-logo span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-links{display:flex;gap:20px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-family:'Space Mono',monospace;position:relative;padding-bottom:3px;transition:color .25s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--accent);transition:width .3s cubic-bezier(.16,1,.3,1)}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after,.nav-links a:hover::after{width:100%}
+.theme-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--ac-mid);cursor:pointer;background:var(--ac-dim);color:var(--accent);flex-shrink:0;transition:background .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.theme-btn:hover{transform:rotate(22deg) scale(1.08);background:var(--ac-mid)}
+.theme-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="dark"] .icon-sun{display:block}[data-theme="dark"] .icon-moon{display:none}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 380px;align-items:center;gap:60px;padding:100px 8% 80px;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;transition:opacity .5s}
+[data-theme="dark"] #hero-canvas{opacity:1}
+[data-theme="dark"] #hero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 70% 90% at 20% 50%,transparent 30%,var(--bg) 100%);pointer-events:none}
+.hero-left{position:relative;z-index:2}
+.hero-kicker{display:flex;align-items:center;gap:14px;margin-bottom:32px;opacity:0;animation:fadeIn .7s cubic-bezier(.16,1,.3,1) forwards .3s}
+.hero-kicker-rule{width:28px;height:1.5px;background:var(--accent)}
+.hero-kicker span{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.hero-name{font-family:'Fraunces',Georgia,serif;font-size:clamp(4.5rem,11vw,11rem);font-weight:300;line-height:.9;letter-spacing:-.02em;color:var(--text);opacity:0;animation:fadeIn 1.1s cubic-bezier(.16,1,.3,1) forwards .5s}
+.hero-name .accent{color:var(--accent);font-style:italic}
+.hero-divider{margin:36px 0;height:1px;background:linear-gradient(90deg,var(--accent),transparent);opacity:0;animation:fadeIn .6s forwards .9s}
+.hero-sub{display:flex;align-items:flex-start;gap:20px;opacity:0;animation:fadeIn .8s cubic-bezier(.16,1,.3,1) forwards 1s}
+.hero-bracket{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--accent);opacity:.5;margin-top:2px;flex-shrink:0}
+.tw-wrap{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.02em;color:var(--muted);min-height:1.5em}
+.cursor{display:inline-block;width:2px;height:.9em;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink 1.1s step-end infinite}
+.hero-loc{margin-top:16px;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeIn .7s forwards 1.2s}
+.loc-dot{width:6px;height:6px;border-radius:50%;background:var(--second);box-shadow:0 0 0 3px var(--sec-dim);animation:pulseRing 2.5s ease-out infinite}
+.hero-loc span{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero-stats{display:flex;gap:0 40px;margin-top:60px;padding-top:36px;border-top:1px solid var(--rule);flex-wrap:wrap;opacity:0;animation:fadeIn .8s forwards 1.4s}
+.stat{display:flex;flex-direction:column}
+.stat-n{font-family:'Fraunces',Georgia,serif;font-size:3rem;font-weight:600;line-height:1;color:var(--accent)}
+.stat-l{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:5px;font-family:'Space Mono',monospace}
+.hero-vis{position:relative;z-index:2;opacity:0;animation:fadeIn 1.4s cubic-bezier(.16,1,.3,1) forwards 1s}
+.hero-vis svg{width:100%;height:auto}
+.scroll-cue{position:absolute;bottom:36px;right:8%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn .8s forwards 2s}
+.scroll-txt{writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.scroll-bar{width:1px;height:48px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollA 2.2s ease-in-out infinite}
+
+/* SHARED */
+section{padding:120px 8%}
+.sl{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.st{font-family:'Fraunces',Georgia,serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.05;color:var(--text)}
+.st em{font-style:italic;color:var(--accent)}
+.sr{height:1px;background:linear-gradient(90deg,var(--ac-mid),transparent);margin-top:20px;margin-bottom:72px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ABOUT */
+#about{background:var(--bg-surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-lbl{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.about-h{font-family:'Fraunces',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;color:var(--text);margin-bottom:28px}
+.about-h em{font-style:italic;color:var(--accent)}
+.about-p{font-size:.93rem;line-height:1.85;color:var(--muted);margin-bottom:18px;text-align:justify}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{padding:5px 14px;border:1px solid var(--ac-mid);border-radius:2px;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--ac-dim)}
+.about-card{background:var(--bg-card);border-left:3px solid var(--accent);padding:40px 36px}
+.ac-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+.ac-row:last-child{border-bottom:none}
+.ac-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ac-val{font-family:'Fraunces',Georgia,serif;font-size:1.5rem;font-weight:600;color:var(--accent);line-height:1}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skill-intro{font-size:.93rem;color:var(--muted);max-width:520px;margin-bottom:60px;line-height:1.8}
+.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:48px 36px}
+.ring-item{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.ring-item.visible{opacity:1;transform:translateY(0)}
+.ring-svg{width:88px;height:88px}
+.ring-track{fill:none;stroke:var(--ac-dim);stroke-width:4}
+.ring-fill{fill:none;stroke:var(--accent);stroke-width:4;stroke-linecap:round;stroke-dasharray:239;stroke-dashoffset:239;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.4s cubic-bezier(.16,1,.3,1)}
+.ring-pct{font-family:'Fraunces',Georgia,serif;font-size:1.3rem;font-weight:600;fill:var(--accent)}
+.ring-name{font-size:.75rem;font-weight:500;text-align:center;color:var(--text);line-height:1.3}
+.ring-cat{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:2px}
+
+/* PROJECTS */
+#projects{background:var(--bg-surface)}
+.epoch{display:flex;align-items:center;gap:18px;margin-bottom:28px}
+.epoch-t{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.epoch-l{flex:1;height:1px;background:linear-gradient(90deg,var(--ac-mid),transparent)}
+
+/* Featured cards - number stays faint always, no hover change */
+.fc{position:relative;overflow:hidden;background:var(--bg-card);border-left:3px solid var(--accent);padding:52px 56px;margin-bottom:2px;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1),background .3s,box-shadow .3s}
+.fc.visible{opacity:1;transform:translateY(0)}
+/* Number is always faint via color, never changes */
+.fc::after{content:attr(data-n);position:absolute;top:-20px;right:44px;font-family:'Fraunces',Georgia,serif;font-size:13rem;font-weight:700;line-height:1;pointer-events:none;user-select:none;color:var(--ac-dim)}
+.fc:hover{background:var(--card-hover);box-shadow:var(--shadow)}
+.fc-inner{display:grid;grid-template-columns:1fr 300px;gap:52px;align-items:start;position:relative;z-index:1}
+.fc-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;padding:4px 12px;background:var(--ac-dim);border:1px solid var(--ac-mid);border-radius:2px;font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.fc-num{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.22em;color:var(--accent);opacity:.6;margin-bottom:14px}
+.fc-title{font-family:'Fraunces',Georgia,serif;font-size:2rem;font-weight:400;line-height:1.1;color:var(--text);margin-bottom:16px}
+.fc-title em{font-style:italic;color:var(--accent)}
+.fc-desc{font-size:.88rem;line-height:1.8;color:var(--muted);margin-bottom:22px;text-align:justify}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.tag{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--ac-mid);border-radius:2px;color:var(--accent);background:var(--tag-bg)}
+.fc-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--ac-dim);border:1px solid var(--ac-mid);padding:10px 20px;border-radius:2px}
+.fc-cta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.fc-note{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--muted);opacity:.7;display:block;margin-top:10px}
+.fc-vis{display:flex;align-items:center;justify-content:flex-end}
+.fc-vis svg{width:100%;max-width:270px}
+
+/* Regular cards - number always faint */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px}
+.cc{background:var(--bg-card);padding:44px 40px;position:relative;overflow:hidden;border-bottom:2px solid transparent;cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .3s,background .3s,box-shadow .3s}
+.cc.visible{opacity:1;transform:translateY(0)}
+.cc:hover{border-color:var(--accent);background:var(--card-hover);box-shadow:var(--shadow)}
+/* Card numbers always use ac-dim color */
+.cc-n{font-family:'Fraunces',Georgia,serif;font-size:4.5rem;font-weight:700;color:var(--ac-dim);line-height:1;margin-bottom:-4px}
+.cc-title{font-family:'Fraunces',Georgia,serif;font-size:1.4rem;font-weight:400;line-height:1.2;color:var(--text);margin-bottom:12px}
+.cc-desc{font-size:.86rem;line-height:1.72;color:var(--muted);margin-bottom:20px}
+.cc-cta{display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cc-cta svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.cc:hover .cc-cta svg{transform:translate(2px,-2px)}
+
+/* OVERLAY */
+#overlay{position:fixed;inset:0;z-index:900;display:flex;align-items:stretch;opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
+#overlay.open{opacity:1;pointer-events:all}
+.ov-back{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer}
+.ov-panel{position:relative;z-index:1;margin-left:auto;width:min(700px,100%);background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column}
+#overlay.open .ov-panel{transform:translateX(0)}
+.ov-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;background:var(--bg);border-bottom:1px solid var(--rule)}
+.ov-hl{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.ov-x{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);cursor:pointer;background:transparent;color:var(--text);display:flex;align-items:center;justify-content:center;transition:background .25s}
+.ov-x:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.ov-x svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
+.ov-body{padding:48px 40px;flex:1}
+.ov-num{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--accent);opacity:.65;margin-bottom:14px}
+.ov-title{font-family:'Fraunces',Georgia,serif;font-size:2.2rem;font-weight:400;line-height:1.1;color:var(--text);margin-bottom:8px}
+.ov-title em{font-style:italic;color:var(--accent)}
+.ov-badge{display:inline-flex;align-items:center;margin-bottom:28px;padding:4px 12px;background:var(--ac-dim);border:1px solid var(--ac-mid);border-radius:2px;font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ov-div{height:1px;background:var(--rule);margin:24px 0}
+.ov-sl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;opacity:.8}
+.ov-txt{font-size:.9rem;line-height:1.82;color:var(--muted);margin-bottom:16px;text-align:justify}
+.ov-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.ov-impact{background:var(--bg-surface);border-left:3px solid var(--accent);padding:20px 24px;border-radius:0 4px 4px 0;margin:20px 0}
+.ov-impact p{font-size:.9rem;line-height:1.78;color:var(--text)}
+.ov-impact strong{color:var(--accent)}
+.ov-link{display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:12px 24px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transition:opacity .25s,transform .25s}
+.ov-link:hover{opacity:.88;transform:translateY(-1px)}
+.ov-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.ov-note{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--muted);opacity:.65;margin-top:12px;display:block}
+
+.tl-list{margin-top:10px;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.tl-list li{font-size:.83rem;line-height:1.72;color:var(--muted);text-align:justify;padding-left:4px}
+.tl-list li::marker{color:var(--accent)}
+
+/* COMING SOON */
+#coming{background:var(--cs-bg);padding:120px 8%}
+/* Light mode: deep warm terracotta-brown — same family as the rust accent, feels like a continuation of the page */
+[data-theme="light"] #coming{background:#2C1A0E}
+[data-theme="light"] .cs-sl{color:#E8A87C}
+[data-theme="light"] .cs-st{color:#FAF0E6}
+[data-theme="light"] .cs-st em{color:#E8A87C}
+[data-theme="light"] .cs-rule{background:linear-gradient(90deg,rgba(232,168,124,.45),transparent)}
+[data-theme="light"] .cs-card{background:rgba(255,255,255,.04);border:1px solid rgba(232,168,124,.18)}
+[data-theme="light"] .cs-card:hover{background:rgba(255,255,255,.08);border-color:rgba(232,168,124,.4)}
+[data-theme="light"] .cs-pill{background:rgba(232,168,124,.14);border:1px solid rgba(232,168,124,.38);color:#E8A87C}
+[data-theme="light"] .cs-pill::before{background:#E8A87C}
+[data-theme="light"] .cs-name{color:#FAF0E6}
+[data-theme="light"] .cs-tag{color:#C97B50}
+[data-theme="light"] .cs-desc{color:#A07860}
+[data-theme="light"] .cs-chip{border-color:rgba(232,168,124,.22);color:#E8A87C;opacity:1}
+.cs-sl{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.cs-st{font-family:'Fraunces',Georgia,serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.05;color:var(--cs-text)}
+.cs-st em{font-style:italic;color:var(--accent)}
+.cs-rule{height:1px;background:linear-gradient(90deg,var(--ac-mid),transparent);margin-top:20px;margin-bottom:72px}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.cs-card{background:rgba(255,255,255,.025);border:1px solid var(--ac-dim);padding:48px 40px;cursor:default;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .3s,border-color .3s}
+.cs-card.visible{opacity:1;transform:translateY(0)}
+.cs-card:hover{background:rgba(255,255,255,.05);border-color:var(--ac-mid)}
+.cs-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--ac-dim);border:1px solid var(--ac-mid);border-radius:100px;font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.cs-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 1.8s ease-in-out infinite}
+.cs-name{font-family:'Fraunces',Georgia,serif;font-size:2rem;font-weight:400;line-height:1.1;color:var(--cs-text);margin-bottom:8px}
+.cs-tag{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--accent);margin-bottom:20px;display:block}
+.cs-desc{font-size:.87rem;line-height:1.8;color:var(--cs-muted);margin-bottom:24px;text-align:justify}
+.cs-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cs-chip{font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ac-dim);border-radius:2px;color:var(--accent);opacity:.8}
+
+/* ARTICLES */
+#articles{background:var(--bg)}
+.drag-hint{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);opacity:.7}
+.drag-hint svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+.art-wrap{position:relative;overflow:hidden;margin:0 -8%;padding:0 8%;cursor:grab;user-select:none}
+.art-wrap:active{cursor:grabbing}
+.art-track{display:flex;gap:22px;width:max-content;padding-bottom:12px}
+.art-card{flex-shrink:0;width:300px;background:var(--bg-card);border:1px solid var(--rule);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .3s,box-shadow .3s,transform .3s}
+.art-card:hover{border-color:var(--ac-mid);box-shadow:var(--shadow);transform:translateY(-4px)}
+.art-top{padding:28px 24px 20px;flex:1}
+.art-cat{font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.art-title{font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:400;line-height:1.3;color:var(--text);margin-bottom:10px}
+.art-desc{font-size:.82rem;line-height:1.7;color:var(--muted)}
+.art-bot{padding:14px 24px;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between}
+.art-meta{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--muted)}
+.art-badge{display:inline-block;padding:2px 8px;border-radius:2px;font-family:'Space Mono',monospace;font-size:.53rem;letter-spacing:.08em;text-transform:uppercase}
+.pub{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.25)}
+.draft{background:var(--ac-dim);color:var(--accent);border:1px solid var(--ac-mid)}
+
+/* JOURNEY + REVIEWS */
+#jr{background:var(--bg-surface);padding:120px 8%}
+.jr-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.jr-h{font-family:'Fraunces',Georgia,serif;font-size:1.8rem;font-weight:300;line-height:1.1;color:var(--text);margin-bottom:48px}
+.jr-h em{font-style:italic;color:var(--accent)}
+/* Timeline */
+.tl{position:relative;padding-left:40px}
+.tl::before{content:'';position:absolute;left:0;top:6px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--ac-dim))}
+.tl-item{position:relative;margin-bottom:40px;opacity:0;transform:translateX(-20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.tl-item.visible{opacity:1;transform:translateX(0)}
+.tl-item:nth-child(2){transition-delay:.1s}.tl-item:nth-child(3){transition-delay:.2s}.tl-item:nth-child(4){transition-delay:.3s}
+.tl-dot{position:absolute;left:-45px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg-surface);box-shadow:0 0 0 3px var(--ac-dim)}
+.tl-period{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;opacity:.85}
+.tl-role{font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:3px}
+.tl-org{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--muted);margin-bottom:8px}
+.tl-desc{font-size:.83rem;line-height:1.7;color:var(--muted);text-align:justify}
+/* Reviews */
+.rv-vp{height:520px;overflow:hidden;position:relative}
+.rv-vp::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,var(--bg-surface),transparent);pointer-events:none;z-index:1}
+.rv-track{display:flex;flex-direction:column;gap:16px;animation:scrollUp 30s linear infinite}
+.rv-track:hover{animation-play-state:paused}
+.rv-card{background:var(--rv-bg);border:1px solid var(--rule);border-left:3px solid var(--accent);padding:24px 28px;border-radius:0 4px 4px 0;flex-shrink:0}
+.rv-text{font-size:.88rem;line-height:1.75;color:var(--muted);margin-bottom:14px;font-style:italic}
+.rv-text::before{content:'"';color:var(--accent);font-family:'Fraunces',Georgia,serif;font-size:1.5rem;line-height:0;vertical-align:-.3em;margin-right:4px}
+.rv-name{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+.rv-proj{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:3px}
+@keyframes scrollUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+
+/* EDUCATION */
+#edu{background:var(--bg)}
+.edu-track{position:relative;padding-top:52px;margin-top:8px}
+.edu-track::before{content:'';position:absolute;top:20px;left:0;right:0;height:1px;background:linear-gradient(to right,var(--accent),var(--ac-dim))}
+.edu-items{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.edu-item{padding-right:44px;position:relative;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.edu-item.visible{opacity:1;transform:translateY(0)}
+.edu-item:nth-child(2){transition-delay:.15s}.edu-item:nth-child(3){transition-delay:.3s}
+.edu-dot{position:absolute;top:-57px;left:0;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--ac-dim)}
+.edu-yr{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.edu-sch{font-family:'Fraunces',Georgia,serif;font-size:1.7rem;font-weight:400;line-height:1.15;color:var(--text)}
+.edu-sch em{font-style:italic;color:var(--muted);font-size:1rem;display:block;margin-top:3px}
+.edu-deg{font-size:.86rem;color:var(--muted);margin-top:10px;line-height:1.5}
+.edu-badge{display:inline-block;margin-top:14px;padding:4px 14px;border:1px solid var(--ac-mid);border-radius:2px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cv-row{margin-top:72px;padding-top:48px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:40px}
+.cv-label{font-size:.87rem;color:var(--muted);max-width:340px;line-height:1.6}
+.btn-a{display:inline-flex;align-items:center;gap:12px;padding:14px 32px;background:var(--accent);color:#fff;text-decoration:none;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;transition:opacity .3s,transform .25s;flex-shrink:0}
+.btn-a:hover{opacity:.88;transform:translateY(-1px)}
+[data-theme="dark"] .btn-a{background:#8a6d28;color:#FAF0E6}
+[data-theme="dark"] .btn-a:hover{background:#7a5e20;opacity:1}
+
+.btn-a svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.book-btn{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:12px 28px;border:1px solid var(--ac-mid);color:var(--accent);font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .25s,color .25s,transform .25s}
+.book-btn:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
+.book-btn svg{width:14px;height:14px;stroke:currentColor;flex-shrink:0}
+.book-line{margin-top:16px}
+
+
+/* CONTACT */
+#contact{background:var(--bg-surface);text-align:center}
+.con-inner{max-width:800px;margin:0 auto}
+.con-pre{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+.con-h{font-family:'Fraunces',Georgia,serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:300;line-height:1;color:var(--text);margin-bottom:16px}
+.con-h em{font-style:italic;color:var(--accent)}
+.con-sub{font-size:1rem;color:var(--muted);margin-bottom:56px;line-height:1.6}
+.con-email{display:inline-block;font-family:'Fraunces',Georgia,serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;color:var(--text);text-decoration:none;position:relative;padding-bottom:6px;transition:color .3s}
+.con-email::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width .4s cubic-bezier(.16,1,.3,1)}
+.con-email:hover{color:var(--accent)}
+.con-email:hover::after{width:100%}
+.con-phone{margin-top:10px;font-family:'Space Mono',monospace;font-size:.76rem;color:var(--muted);letter-spacing:.08em}
+.soc-row{display:flex;justify-content:center;gap:36px;margin-top:52px;flex-wrap:wrap}
+.soc-link{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding-bottom:3px;transition:color .25s}
+.soc-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.soc-link:hover{color:var(--accent)}
+.soc-link:hover::after{width:100%}
+
+/* FOOTER */
+footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-size:.67rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.07em}
+.f-logo{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.1rem;color:var(--text)}
+.f-logo span{color:var(--accent)}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pulseRing{0%{box-shadow:0 0 0 0 var(--ac-mid)}70%{box-shadow:0 0 0 8px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}
+@keyframes scrollA{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(1.4);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:1100px){#hero{grid-template-columns:1fr;gap:0}.hero-vis{display:none}}
+@media(max-width:900px){
+  section,#coming,#jr{padding:90px 6%}
+  nav{padding:0 6%}.nav-links{gap:12px}.nav-links a{font-size:.6rem}
+  .hero-name{font-size:clamp(3.8rem,15vw,7rem)}
+  .about-grid,.jr-grid{grid-template-columns:1fr;gap:52px}
+  .rings{grid-template-columns:repeat(2,1fr);gap:36px}
+  .fc-inner{grid-template-columns:1fr}.fc-vis{display:none}
+  .cg{grid-template-columns:1fr}
+  .cs-grid{grid-template-columns:1fr;gap:2px}
+  .edu-items{grid-template-columns:1fr;gap:36px}
+  .edu-track::before,.edu-dot{display:none}
+  .cv-row{flex-direction:column;align-items:flex-start;gap:20px}
+  .rv-vp{height:420px}
+  .ov-panel{width:100%}
+  .ov-body,.ov-head{padding-left:24px;padding-right:24px}
+  .art-wrap{margin:0 -6%;padding:0 6%}
+}
+@media(max-width:600px){
+  .hero-name{font-size:clamp(3.2rem,17vw,5rem)}
+  .hero-stats{gap:20px 28px}
+  footer{flex-direction:column;gap:12px;text-align:center}
+  .fc{padding:36px 28px}.fc::after{font-size:8rem;right:18px}
+  .cc{padding:36px 28px}
+}
+
+/* LOGO - MO MONOGRAM FUSED WITH SCATTER PLOT */
+/* The M's right arm (3-stroke design) naturally flows into the O circle.
+   The O's right edge IS the Y-axis. MO = author of the data story. */
+.logo-svg{overflow:visible;display:block;transition:filter .35s}
+.logo-mo{transition:opacity .3s}
+/* Trend line: length ~47, draws left-to-right after brief delay */
+.logo-trend{stroke-dasharray:52;stroke-dashoffset:52;animation:trendDraw 1.0s cubic-bezier(.16,1,.3,1) forwards .35s}
+/* Scatter dots: stagger in after trend line finishes */
+.logo-dot{opacity:0;transform:scale(0.3);animation:dotFade .38s cubic-bezier(.34,1.56,.64,1) forwards}
+.ld1{animation-delay:1.1s}.ld2{animation-delay:1.24s}.ld3{animation-delay:1.38s}
+.ld4{animation-delay:1.52s}.ld5{animation-delay:1.66s}
+/* Peak point: fades in then oscillates */
+.logo-peak{opacity:0;animation:dotFade .38s cubic-bezier(.34,1.56,.64,1) forwards 1.8s, peakPulse 2.6s ease-in-out infinite 2.3s}
+@keyframes trendDraw{to{stroke-dashoffset:0}}
+@keyframes dotFade{from{opacity:0;transform:scale(0.3)}to{opacity:1;transform:scale(1)}}
+@keyframes peakPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(0.65)}}
+/* Hover: glow across entire mark */
+.nav-logo:hover .logo-svg{filter:drop-shadow(0 0 5px var(--accent))}
+.f-logo svg{transition:filter .35s;cursor:default}
+.f-logo:hover svg{filter:drop-shadow(0 0 4px var(--accent))}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo" aria-label="Moses Oyedele - Home">
+    <svg class="logo-svg" width="92" height="33" viewBox="0 0 92 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- MO MONOGRAM
+           M: 3-stroke design (left-vert, left-diag, right-diag).
+           The right arm ends at (16,6) which is also the top of the O.
+           O: circle whose left edge (x=15) overlaps M's right arm (x=16)
+           creating a genuine typographic fusion.
+           O's RIGHT edge (x=37) becomes the Y-axis line below. -->
+      <g class="logo-mo">
+        <polyline points="2,28 2,6 10,17 16,6"
+          stroke="var(--accent)" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="26" cy="17" r="11"
+          stroke="var(--accent)" stroke-width="2.5" fill="none"/>
+      </g>
+      <!-- Y-axis: emerges from O's right edge (x=37) upward -->
+      <line x1="37" y1="28" x2="37" y2="4"
+        stroke="var(--accent)" stroke-width="0.65" stroke-linecap="round" opacity="0.24"/>
+      <!-- X-axis -->
+      <line x1="37" y1="28" x2="88" y2="28"
+        stroke="var(--accent)" stroke-width="0.65" stroke-linecap="round" opacity="0.24"/>
+      <!-- Confidence bands (upper and lower, faint dashed) -->
+      <line x1="40" y1="23" x2="83" y2="4"
+        stroke="var(--accent)" stroke-width="0.6" opacity="0.16" stroke-dasharray="2 3"/>
+      <line x1="40" y1="29" x2="83" y2="10"
+        stroke="var(--accent)" stroke-width="0.6" opacity="0.16" stroke-dasharray="2 3"/>
+      <!-- Regression trend line: animates in -->
+      <line class="logo-trend" x1="40" y1="26" x2="84" y2="6"
+        stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- Scatter data points: staggered fade-in -->
+      <circle class="logo-dot ld1" cx="44" cy="24" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <circle class="logo-dot ld2" cx="51" cy="21" r="2.0" fill="var(--accent)" opacity="0.75"/>
+      <circle class="logo-dot ld3" cx="58" cy="17" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <circle class="logo-dot ld4" cx="65" cy="14" r="2.0" fill="var(--accent)" opacity="0.75"/>
+      <circle class="logo-dot ld5" cx="72" cy="11" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <!-- Peak point: oscillates continuously -->
+      <circle class="logo-peak" cx="79" cy="8" r="2.6" fill="var(--accent)"/>
+    </svg>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#hero" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Work</a>
+      <a href="#coming">Lab</a>
+      <a href="#articles">Writing</a>
+      <a href="#jr">Journey</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle colour theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- OVERLAY -->
+<div id="overlay" role="dialog" aria-modal="true">
+  <div class="ov-back" id="ov-back"></div>
+  <div class="ov-panel">
+    <div class="ov-head"><span class="ov-hl">Project Detail</span><button class="ov-x" id="ov-x"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="ov-body" id="ov-body"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-left">
+    <div class="hero-kicker"><div class="hero-kicker-rule"></div><span>Data Scientist and BI Specialist</span></div>
+    <h1 class="hero-name">Moses<br><span class="accent">Oyedele.</span></h1>
+    <div class="hero-divider"></div>
+    <div class="hero-sub">
+      <span class="hero-bracket">[</span>
+      <div class="tw-wrap"><span id="tw-text"></span><span class="cursor"></span></div>
+      <span class="hero-bracket">]</span>
+    </div>
+    <div class="hero-loc"><div class="loc-dot"></div><span>Calgary, AB, Canada &#183; Open to opportunities</span></div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n" data-target="10" data-suffix="+">0</span><span class="stat-l">Years experience</span></div>
+      <div class="stat"><span class="stat-n" data-target="3" data-suffix="">0</span><span class="stat-l">Degrees</span></div>
+      <div class="stat"><span class="stat-n" data-target="40" data-suffix="+">0</span><span class="stat-l">Projects</span></div>
+      <div class="stat"><span class="stat-n" data-target="52" data-suffix="%">0</span><span class="stat-l">Cost saved</span></div>
+    </div>
+  </div>
+  <div class="hero-vis">
+    <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="115" x2="400" y2="115" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="0" y1="230" x2="400" y2="230" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="0" y1="345" x2="400" y2="345" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="100" y1="0" x2="100" y2="460" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="200" y1="0" x2="200" y2="460" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="300" y1="0" x2="300" y2="460" stroke="var(--rule)" stroke-width="1"/>
+      <ellipse cx="310" cy="95" rx="68" ry="54" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1" stroke-dasharray="4 3"/>
+      <ellipse cx="130" cy="240" rx="75" ry="58" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1" stroke-dasharray="4 3"/>
+      <ellipse cx="290" cy="375" rx="66" ry="50" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="280" y1="78" x2="310" y2="58" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="310" y1="58" x2="348" y2="72" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="348" y1="72" x2="365" y2="106" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="75" y1="222" x2="105" y2="205" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="105" y1="205" x2="145" y2="210" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="145" y1="210" x2="168" y2="235" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="248" y1="358" x2="275" y2="344" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="275" y1="344" x2="322" y2="348" stroke="var(--ac-mid)" stroke-width="0.9"/>
+      <line x1="310" y1="95" x2="130" y2="240" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 5" opacity=".18"/>
+      <line x1="130" y1="240" x2="290" y2="375" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 5" opacity=".18"/>
+      <line x1="38" y1="415" x2="385" y2="48" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="8 5" opacity=".25"/>
+      <circle cx="280" cy="78" r="4" fill="var(--accent)" opacity=".7"/>
+      <circle cx="310" cy="58" r="3.5" fill="var(--accent)" opacity=".55"/>
+      <circle cx="344" cy="70" r="5" fill="var(--accent)" opacity=".85"/>
+      <circle cx="368" cy="107" r="3" fill="var(--accent)" opacity=".5"/>
+      <circle cx="325" cy="92" r="6" fill="var(--accent)"/>
+      <circle cx="325" cy="92" r="13" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+      <circle cx="75" cy="222" r="4" fill="var(--accent)" opacity=".6"/>
+      <circle cx="107" cy="206" r="3.5" fill="var(--accent)" opacity=".5"/>
+      <circle cx="145" cy="212" r="5" fill="var(--accent)" opacity=".75"/>
+      <circle cx="170" cy="236" r="3" fill="var(--accent)" opacity=".45"/>
+      <circle cx="132" cy="242" r="6.5" fill="var(--accent)" opacity=".9"/>
+      <circle cx="132" cy="242" r="14" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+      <circle cx="248" cy="362" r="4" fill="var(--accent)" opacity=".6"/>
+      <circle cx="276" cy="347" r="3.5" fill="var(--accent)" opacity=".5"/>
+      <circle cx="323" cy="352" r="5" fill="var(--accent)" opacity=".75"/>
+      <circle cx="291" cy="378" r="6.5" fill="var(--accent)" opacity=".9"/>
+      <circle cx="291" cy="378" r="13" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+      <circle cx="56" cy="84" r="2.8" fill="var(--accent)" opacity=".3"/>
+      <circle cx="198" cy="132" r="2.5" fill="var(--accent)" opacity=".25"/>
+      <circle cx="92" cy="415" r="2.8" fill="var(--accent)" opacity=".3"/>
+      <line x1="18" y1="440" x2="392" y2="440" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="18" y1="18" x2="18" y2="440" stroke="var(--rule)" stroke-width="1"/>
+      <text x="22" y="456" fill="var(--muted)" font-size="8.5" font-family="monospace" opacity=".55">K-Means Clustering K=3 n=26</text>
+      <text x="375" y="456" fill="var(--accent)" font-size="8.5" font-family="monospace" text-anchor="end" opacity=".65">R2 = 0.91</text>
+    </svg>
+  </div>
+  <div class="scroll-cue"><span class="scroll-txt">Scroll</span><div class="scroll-bar"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <p class="about-lbl">Who I Am</p>
+      <h2 class="about-h">A decade of turning<br><em>data into decisions.</em></h2>
+      <p class="about-p">I am a results-driven Data Scientist with over a decade of academic and professional experience in machine learning, statistical modelling, and business intelligence. I believe data only matters when it changes something, and I have spent my career making sure it does.</p>
+      <p class="about-p">Born in Nigeria, I earned my Bachelor and Masters of Science in Statistics at the University of Ilorin before completing a second Masters in Data Analytics at Aston University in Birmingham, UK. I now work as a Data Scientist at Canadian Blood Services in Calgary, where I build ML systems that directly impact the national blood supply chain.</p>
+      <p class="about-p">Prior to Canada, I spent over four years at Nigeria Inter-Bank Settlement System (NIBSS), where a deep neural network I deployed achieved 97.84% forecast accuracy and saved the company 52% in avoidable costs. I thrive at the intersection of rigorous statistical thinking and practical business impact.</p>
+      <div class="chips">
+        <span class="chip">Machine Learning</span><span class="chip">Statistical Modelling</span>
+        <span class="chip">Power BI</span><span class="chip">NLP</span>
+        <span class="chip">Monte Carlo</span><span class="chip">Operations Research</span>
+        <span class="chip">Azure Synapse</span><span class="chip">Healthcare Analytics</span>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="about-card">
+        <div class="ac-row"><span class="ac-label">Years Experience</span><span class="ac-val">10+</span></div>
+        <div class="ac-row"><span class="ac-label">Academic Degrees</span><span class="ac-val">3</span></div>
+        <div class="ac-row"><span class="ac-label">Projects Delivered</span><span class="ac-val">40+</span></div>
+        <div class="ac-row"><span class="ac-label">Cost Reduction Achieved</span><span class="ac-val">52%</span></div>
+        <div class="ac-row"><span class="ac-label">Location</span><span class="ac-val" style="font-size:1rem">Calgary, AB, Canada</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="sl reveal">02 Skills</p>
+  <h2 class="st reveal">Core <em>Competencies</em></h2>
+  <div class="sr reveal"></div>
+  <p class="skill-intro reveal">A decade of applied data science across healthcare, banking, and national institutions. From statistical theory to production ML systems and enterprise BI platforms.</p>
+  <div class="rings">
+    <div class="ring-item d1"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="95"/><text x="44" y="50" text-anchor="middle" class="ring-pct">95%</text></svg><span class="ring-name">Python</span><span class="ring-cat">Programming</span></div>
+    <div class="ring-item d2"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="91"/><text x="44" y="50" text-anchor="middle" class="ring-pct">91%</text></svg><span class="ring-name">R Language</span><span class="ring-cat">Statistical Computing</span></div>
+    <div class="ring-item d3"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="93"/><text x="44" y="50" text-anchor="middle" class="ring-pct">93%</text></svg><span class="ring-name">SQL</span><span class="ring-cat">Data Engineering</span></div>
+    <div class="ring-item d4"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="90"/><text x="44" y="50" text-anchor="middle" class="ring-pct">90%</text></svg><span class="ring-name">Git</span><span class="ring-cat">Version Control</span></div>
+    <div class="ring-item d1"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="95"/><text x="44" y="50" text-anchor="middle" class="ring-pct">95%</text></svg><span class="ring-name">Power BI</span><span class="ring-cat">Visualization</span></div>
+    <div class="ring-item d2"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="92"/><text x="44" y="50" text-anchor="middle" class="ring-pct">92%</text></svg><span class="ring-name">Tableau</span><span class="ring-cat">Data Storytelling</span></div>
+    <div class="ring-item d3"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="97"/><text x="44" y="50" text-anchor="middle" class="ring-pct">97%</text></svg><span class="ring-name">Statistical Modelling</span><span class="ring-cat">Mathematics</span></div>
+    <div class="ring-item d4"><svg class="ring-svg" viewBox="0 0 88 88"><circle class="ring-track" cx="44" cy="44" r="38"/><circle class="ring-fill" cx="44" cy="44" r="38" data-pct="90"/><text x="44" y="50" text-anchor="middle" class="ring-pct">90%</text></svg><span class="ring-name">Microsoft Azure</span><span class="ring-cat">Cloud and Data Ops</span></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="sl reveal">03 Portfolio</p>
+  <h2 class="st reveal">Selected <em>Work</em></h2>
+  <div class="sr reveal"></div>
+
+  <div class="epoch reveal"><span class="epoch-t">Current Work at Canadian Blood Services</span><div class="epoch-l"></div></div>
+
+  <div class="fc reveal" data-n="01" onclick="openProject('nlp')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; End-to-End ML</span>
+        <div class="fc-num">01 / NLP and Machine Learning</div>
+        <h3 class="fc-title">NLP-Driven Supply Chain<br><em>Blood Demand Forecasting</em></h3>
+        <p class="fc-desc">An end-to-end ML portal that translates messy clinical abbreviations into standardised CIHI codes using TF-IDF and K-Nearest Neighbours, powering a Random Forest model that predicts hospital blood demand with quantified confidence intervals to eliminate stock-outs and reduce waste.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">NLP / TF-IDF</span><span class="tag">Random Forest</span><span class="tag">Scikit-learn</span><span class="tag">Streamlit</span></div>
+        <span class="fc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+        <span class="fc-note">Internal deployment &middot; CBS proprietary system</span>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="8" width="76" height="24" rx="2" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <text x="38" y="24" text-anchor="middle" fill="var(--accent)" font-size="7" font-family="monospace">Raw Abbreviations</text>
+          <line x1="76" y1="20" x2="94" y2="20" stroke="var(--ac-mid)" stroke-width="1"/>
+          <rect x="94" y="8" width="66" height="24" rx="2" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <text x="127" y="24" text-anchor="middle" fill="var(--accent)" font-size="7" font-family="monospace">TF-IDF + kNN</text>
+          <line x1="160" y1="20" x2="178" y2="20" stroke="var(--ac-mid)" stroke-width="1"/>
+          <rect x="178" y="8" width="66" height="24" rx="2" fill="var(--sec-dim)" stroke="var(--second)" stroke-width="1" opacity=".7"/>
+          <text x="211" y="24" text-anchor="middle" fill="var(--second)" font-size="7" font-family="monospace">CIHI Codes</text>
+          <line x1="211" y1="32" x2="211" y2="46" stroke="var(--ac-mid)" stroke-width="1" opacity=".5"/>
+          <text x="211" y="58" text-anchor="middle" fill="var(--accent)" font-size="7" font-family="monospace" opacity=".6">Random Forest</text>
+          <line x1="16" y1="70" x2="16" y2="185" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="16" y1="185" x2="248" y2="185" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="16" y1="152" x2="248" y2="152" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <line x1="16" y1="120" x2="248" y2="120" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <polygon points="170,96 198,88 226,82 248,76 248,112 226,116 198,120 170,122" fill="var(--sec-dim)"/>
+          <polyline points="16,172 46,163 76,154 106,144 136,135 155,126 170,96" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <polyline points="170,96 198,88 226,82 248,76" fill="none" stroke="var(--second)" stroke-width="1.8" stroke-dasharray="5 3" opacity=".8"/>
+          <circle cx="16" cy="172" r="2.5" fill="var(--accent)"/><circle cx="76" cy="154" r="2.5" fill="var(--accent)"/>
+          <circle cx="136" cy="135" r="2.5" fill="var(--accent)"/><circle cx="170" cy="96" r="4" fill="var(--accent)" stroke="var(--bg-card)" stroke-width="1.5"/>
+          <circle cx="226" cy="82" r="2.5" fill="var(--second)" opacity=".8"/>
+          <line x1="170" y1="70" x2="170" y2="185" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 3" opacity=".22"/>
+          <text x="90" y="82" fill="var(--muted)" font-size="6.5" font-family="monospace" text-anchor="middle" opacity=".7">History</text>
+          <text x="210" y="82" fill="var(--second)" font-size="6.5" font-family="monospace" text-anchor="middle" opacity=".8">Forecast</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc reveal" data-n="02" onclick="openProject('diagnostic')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; Operational Analytics</span>
+        <div class="fc-num">02 / Diagnostic Portal</div>
+        <h3 class="fc-title">Under Collections<br><em>Diagnostic Portal</em></h3>
+        <p class="fc-desc">A real-time diagnostic system that surfaces appointment collection shortfalls across clinic networks, pulling live data from Azure Synapse and classifying each clinic as Normal, Warning, or Critical to expose root drivers instantly.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Azure Synapse</span><span class="tag">Pandas</span><span class="tag">Plotly</span><span class="tag">HTML Portal</span></div>
+        <span class="fc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+        <span class="fc-note">Internal deployment &middot; CBS proprietary system</span>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 195" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="8" width="222" height="40" rx="2" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.22)" stroke-width="1"/>
+          <rect x="18" y="56" width="222" height="40" rx="2" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <rect x="18" y="104" width="222" height="72" rx="2" fill="rgba(220,60,60,.05)" stroke="rgba(220,60,60,.2)" stroke-width="1"/>
+          <text x="32" y="26" fill="rgba(34,197,94,.8)" font-size="7.5" font-family="monospace" font-weight="700">NORMAL</text>
+          <text x="110" y="26" fill="rgba(34,197,94,.55)" font-size="6.5" font-family="monospace">12 clinics &middot; Yield above 95%</text>
+          <text x="32" y="74" fill="var(--accent)" font-size="7.5" font-family="monospace" font-weight="700">WARNING</text>
+          <text x="110" y="74" fill="var(--accent)" font-size="6.5" font-family="monospace" opacity=".7">7 clinics &middot; Yield 80 to 95%</text>
+          <text x="32" y="122" fill="rgba(220,60,60,.85)" font-size="7.5" font-family="monospace" font-weight="700">CRITICAL</text>
+          <text x="110" y="122" fill="rgba(220,60,60,.6)" font-size="6.5" font-family="monospace">3 clinics &middot; Yield below 80%</text>
+          <rect x="196" y="113" width="32" height="18" rx="2" fill="rgba(220,60,60,.15)" stroke="rgba(220,60,60,.3)" stroke-width="1"/>
+          <text x="212" y="126" text-anchor="middle" fill="rgba(220,60,60,.9)" font-size="7" font-family="monospace">Alert</text>
+          <text x="139" y="188" fill="var(--muted)" font-size="6.5" font-family="monospace" text-anchor="middle" opacity=".6">Live from Azure Synapse Analytics</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc reveal" data-n="03" onclick="openProject('predictive')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; Predictive Modelling</span>
+        <div class="fc-num">03 / Predictive Portal</div>
+        <h3 class="fc-title">Under Collections Predictive Portal<br><em>and Call-to-Action Framework</em></h3>
+        <p class="fc-desc">Monte Carlo simulation (2,000 runs per clinic) with Damped Holt-Winters forecasting and bootstrap confidence bands to project future shortfall risk, feeding a proactive CTA framework that prescribes interventions before problems arise.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Monte Carlo x2,000</span><span class="tag">Holt-Winters</span><span class="tag">Azure Synapse</span><span class="tag">Plotly</span></div>
+        <span class="fc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+        <span class="fc-note">Internal deployment &middot; CBS proprietary system</span>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="18" y1="12" x2="18" y2="172" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="172" x2="242" y2="172" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="140" x2="242" y2="140" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <line x1="18" y1="108" x2="242" y2="108" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <polygon points="152,90 182,74 212,56 240,36 240,150 212,134 182,122 152,116" fill="var(--sec-dim)"/>
+          <polygon points="152,90 182,82 212,70 240,56 240,130 212,118 182,108 152,108" fill="var(--sec-dim)"/>
+          <polyline points="18,160 48,150 78,140 108,130 132,120 148,110 152,90" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+          <polyline points="152,90 182,78 212,62 240,46" fill="none" stroke="var(--second)" stroke-width="2" stroke-dasharray="5 3" opacity=".85"/>
+          <polyline points="152,108 182,110 212,118 240,132" fill="none" stroke="var(--second)" stroke-width="1" stroke-dasharray="2 3" opacity=".4"/>
+          <polyline points="152,72 182,50 212,36 240,22" fill="none" stroke="var(--second)" stroke-width="1" stroke-dasharray="2 3" opacity=".4"/>
+          <line x1="152" y1="12" x2="152" y2="172" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 3" opacity=".22"/>
+          <circle cx="18" cy="160" r="2.5" fill="var(--accent)"/><circle cx="78" cy="140" r="2.5" fill="var(--accent)"/>
+          <circle cx="132" cy="120" r="2.5" fill="var(--accent)"/><circle cx="152" cy="90" r="4" fill="var(--accent)" stroke="var(--bg-card)" stroke-width="1.5"/>
+          <circle cx="212" cy="62" r="2.5" fill="var(--second)" opacity=".85"/>
+          <text x="84" y="186" fill="var(--muted)" font-size="6.5" font-family="monospace" text-anchor="middle" opacity=".7">Historical</text>
+          <text x="196" y="186" fill="var(--second)" font-size="6.5" font-family="monospace" text-anchor="middle" opacity=".8">MC Forecast (90% CI)</text>
+          <rect x="162" y="20" width="72" height="17" rx="2" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width=".8"/>
+          <text x="198" y="32" text-anchor="middle" fill="var(--accent)" font-size="6.5" font-family="monospace">CTA Triggered</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc reveal" data-n="04" onclick="openProject('milp')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; Operations Research</span>
+        <div class="fc-num">04 / Optimisation and GIS</div>
+        <h3 class="fc-title">Clinic Sites Selection<br><em>and Optimisation</em></h3>
+        <p class="fc-desc">A Mixed Integer Linear Programming model that uses demographic, geographic, and historical donation data to forecast active donor populations within specific Forward Sortation Areas, identifying underutilised donor potential to guide strategic clinic placement decisions.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">MILP / PuLP</span><span class="tag">GeoPandas</span><span class="tag">Demographic Analysis</span><span class="tag">FSA Mapping</span></div>
+        <span class="fc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+        <span class="fc-note">Internal deployment &middot; CBS proprietary system</span>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="16" text-anchor="middle" fill="var(--accent)" font-size="7" font-family="monospace" letter-spacing="1" opacity=".8">FORWARD SORTATION AREAS</text>
+          <polygon points="36,42 52,32 68,42 68,62 52,72 36,62" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="72,42 88,32 104,42 104,62 88,72 72,62" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".7"/>
+          <polygon points="108,42 124,32 140,42 140,62 124,72 108,62" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="144,42 160,32 176,42 176,62 160,72 144,62" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".4"/>
+          <polygon points="180,42 196,32 212,42 212,62 196,72 180,62" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="54,76 70,66 86,76 86,96 70,106 54,96" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".9"/>
+          <polygon points="90,76 106,66 122,76 122,96 106,106 90,96" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="126,76 142,66 158,76 158,96 142,106 126,96" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".55"/>
+          <polygon points="162,76 178,66 194,76 194,96 178,106 162,96" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".35"/>
+          <polygon points="36,110 52,100 68,110 68,130 52,140 36,130" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="72,110 88,100 104,110 104,130 88,140 72,130" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".6"/>
+          <polygon points="108,110 124,100 140,110 140,130 124,140 108,130" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".85"/>
+          <polygon points="144,110 160,100 176,110 176,130 160,140 144,130" fill="var(--ac-dim)" stroke="var(--ac-mid)" stroke-width="1"/>
+          <polygon points="180,110 196,100 212,110 212,130 196,140 180,130" fill="var(--accent)" stroke="var(--ac-mid)" stroke-width="1" opacity=".45"/>
+          <circle cx="88" cy="47" r="5" fill="none" stroke="var(--second)" stroke-width="2"/>
+          <circle cx="70" cy="81" r="5" fill="none" stroke="var(--second)" stroke-width="2"/>
+          <circle cx="124" cy="115" r="5" fill="none" stroke="var(--second)" stroke-width="2"/>
+          <rect x="18" y="152" width="12" height="8" rx="1" fill="var(--accent)" opacity=".8"/>
+          <text x="34" y="160" fill="var(--muted)" font-size="6.5" font-family="monospace">High donor potential</text>
+          <circle cx="148" cy="156" r="4" fill="none" stroke="var(--second)" stroke-width="1.5"/>
+          <text x="156" y="160" fill="var(--muted)" font-size="6.5" font-family="monospace">Selected site</text>
+          <text x="130" y="186" text-anchor="middle" fill="var(--muted)" font-size="6.5" font-family="monospace" opacity=".6">MILP optimised placement</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc reveal" data-n="05" onclick="openProject('seasonality')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; Time Series Analysis</span>
+        <div class="fc-num">05 / Seasonality Analytics</div>
+        <h3 class="fc-title">Donor Appointments<br><em>Seasonality Analysis</em></h3>
+        <p class="fc-desc">A comprehensive seasonality analysis across all variables in the Donor Appointments dataset to identify seasonal trends, peak and off-peak patterns, and cyclical drivers. Findings directly inform appointment scheduling efficiency and collection targets.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">STL Decomposition</span><span class="tag">Time Series</span><span class="tag">Plotly</span><span class="tag">Planning Analytics</span></div>
+        <span class="fc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+        <span class="fc-note">Internal deployment &middot; CBS proprietary system</span>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="18" y1="10" x2="18" y2="165" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="165" x2="248" y2="165" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="130" x2="248" y2="130" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <line x1="18" y1="95" x2="248" y2="95" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <line x1="18" y1="60" x2="248" y2="60" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <polyline points="18,120 36,100 54,86 72,88 90,108 108,122 126,104 144,84 162,80 180,92 198,112 216,126 234,106 248,88" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+          <polyline points="18,126 248,84" fill="none" stroke="var(--second)" stroke-width="1.5" stroke-dasharray="6 4" opacity=".6"/>
+          <rect x="72" y="60" width="54" height="105" fill="var(--ac-dim)" rx="2" opacity=".5"/>
+          <text x="99" y="55" text-anchor="middle" fill="var(--accent)" font-size="6" font-family="monospace" opacity=".8">Peak</text>
+          <rect x="180" y="60" width="54" height="105" fill="var(--sec-dim)" rx="2" opacity=".5"/>
+          <text x="207" y="55" text-anchor="middle" fill="var(--second)" font-size="6" font-family="monospace" opacity=".8">Peak</text>
+          <text x="18" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">Jan</text>
+          <text x="58" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">Mar</text>
+          <text x="98" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">May</text>
+          <text x="138" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">Jul</text>
+          <text x="178" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">Sep</text>
+          <text x="218" y="180" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle">Nov</text>
+          <text x="130" y="195" text-anchor="middle" fill="var(--muted)" font-size="6.5" font-family="monospace" opacity=".6">Appointment yield with seasonal decomposition</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc reveal" data-n="06" onclick="openProject('insolvency')">
+    <div class="fc-inner">
+      <div>
+        <span class="fc-badge">Featured &middot; Enterprise BI</span>
+        <div class="fc-num">06 / Power BI Dashboard</div>
+        <h3 class="fc-title">National Insolvency<br><em>Analytics Portal</em></h3>
+        <p class="fc-desc">Enterprise Power BI dashboards providing deep insight into Canadian insolvency trends, segmented by province, industry, and insolvency type, serving both operational planning and senior executive reporting.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Enterprise Dashboards</span><span class="tag">Policy Analytics</span></div>
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiOGZjMjE4ZDYtOWIzYi00MzVhLTg5ZGYtZjM4OTA2MmUzOTQ4IiwidCI6Ijc1NzZkZWMwLTVkODktNDRkNS1hNTllLTg5NGJjMmM2YWVlNCJ9&pageName=a23fded8378f9e52436d" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="fc-cta" style="text-decoration:none">View Live Dashboard <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+      </div>
+      <div class="fc-vis">
+        <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+          <line x1="18" y1="12" x2="18" y2="158" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="158" x2="242" y2="158" stroke="var(--rule)" stroke-width="1"/>
+          <line x1="18" y1="124" x2="242" y2="124" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <line x1="18" y1="90" x2="242" y2="90" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 4" opacity=".4"/>
+          <polygon points="18,140 48,132 78,124 108,114 138,102 168,90 198,78 228,66 242,60 242,158 18,158" fill="var(--ac-dim)"/>
+          <polygon points="18,152 48,146 78,138 108,134 138,126 168,118 198,110 228,102 242,98 242,158 18,158" fill="var(--sec-dim)" opacity=".6"/>
+          <polyline points="18,140 48,132 78,124 108,114 138,102 168,90 198,78 228,66 242,60" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <polyline points="18,152 48,146 78,138 108,134 138,126 168,118 198,110 228,102 242,98" fill="none" stroke="var(--second)" stroke-width="1.8" opacity=".7"/>
+          <line x1="138" y1="12" x2="138" y2="158" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 3" opacity=".2"/>
+          <text x="140" y="22" fill="var(--accent)" font-size="6" font-family="monospace" opacity=".6">Policy shift</text>
+          <text x="18" y="172" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle" opacity=".6">2019</text>
+          <text x="108" y="172" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle" opacity=".6">2022</text>
+          <text x="198" y="172" fill="var(--muted)" font-size="6" font-family="monospace" text-anchor="middle" opacity=".6">2024</text>
+          <line x1="18" y1="182" x2="36" y2="182" stroke="var(--accent)" stroke-width="2"/>
+          <text x="40" y="186" fill="var(--muted)" font-size="6.5" font-family="monospace">Business Insolvencies</text>
+          <line x1="148" y1="182" x2="166" y2="182" stroke="var(--second)" stroke-width="1.8" opacity=".7"/>
+          <text x="170" y="186" fill="var(--muted)" font-size="6.5" font-family="monospace">Consumer Proposals</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="epoch reveal" style="margin-top:36px"><span class="epoch-t">Earlier Work</span><div class="epoch-l"></div></div>
+  <div class="cg">
+    <div class="cc reveal d1" onclick="openProject('nigeria-fin')">
+      <div class="cc-n">07</div><h3 class="cc-title">Nigerian Financial Industry Performance Dashboard</h3>
+      <p class="cc-desc">Big financial data distilled into a dynamic Power BI dashboard driving strategic decisions for Nigeria's financial sector players.</p>
+      <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Financial Analytics</span></div>
+      <span class="cc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+    <div class="cc reveal d2" onclick="openProject('fin-inclusion')">
+      <div class="cc-n">08</div><h3 class="cc-title">Financial Inclusion Dashboard</h3>
+      <p class="cc-desc">Power BI dashboard showcasing strides in including Nigeria's underbanked population within the formal financial system.</p>
+      <div class="tags"><span class="tag">Power BI</span><span class="tag">Policy Analytics</span><span class="tag">DAX</span></div>
+      <span class="cc-cta">View Details <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+    <div class="cc reveal d1" onclick="openProject('unemployment')">
+      <div class="cc-n">09</div><h3 class="cc-title">Survival Analysis: Youth Unemployment in Nigeria</h3>
+      <p class="cc-desc">R survival analysis modelling time-to-employment for graduates, revealing structural barriers in Nigeria's labour market.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">Survival Analysis</span><span class="tag">Statistics</span></div>
+      <span class="cc-cta">Read on Medium <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+    <div class="cc reveal d2" onclick="openProject('hypertension')">
+      <div class="cc-n">10</div><h3 class="cc-title">Hypertension Patient Statistical Analysis</h3>
+      <p class="cc-desc">Logistic regression on clinical records from University of Ilorin Teaching Hospital to identify patient outcome factors.</p>
+      <div class="tags"><span class="tag">Logistic Regression</span><span class="tag">R</span><span class="tag">Clinical Data</span></div>
+      <span class="cc-cta">Read on Medium <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+    <div class="cc reveal d1" onclick="openProject('bikeshare')">
+      <div class="cc-n">11</div><h3 class="cc-title">US Bikeshare Data Exploration</h3>
+      <p class="cc-desc">Python CLI application computing descriptive statistics via Pandas and NumPy over US bikeshare datasets with interactive filtering.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">CLI</span></div>
+      <span class="cc-cta">GitHub Repo <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+    <div class="cc reveal d2" onclick="openProject('sakila')">
+      <div class="cc-n">12</div><h3 class="cc-title">Sakila Movie Database SQL Exploration</h3>
+      <p class="cc-desc">Deep SQL investigation of an online DVD-rental database using multi-table queries, window functions, and visualised outputs.</p>
+      <div class="tags"><span class="tag">SQL</span><span class="tag">Data Exploration</span><span class="tag">Visualization</span></div>
+      <span class="cc-cta">GitHub Repo <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section id="coming">
+  <p class="cs-sl reveal">04 In the Lab</p>
+  <h2 class="cs-st reveal">What I Am <em>Building Next</em></h2>
+  <div class="cs-rule reveal"></div>
+  <div class="cs-grid">
+    <div class="cs-card reveal d1">
+      <span class="cs-pill">Coming Soon</span>
+      <h3 class="cs-name">Qura</h3>
+      <p class="cs-tag">Intelligent Emergency Care Navigation for Canada</p>
+      <p class="cs-desc">Canada has some of the longest emergency room wait times in the developed world. Qura uses ML trained on hospital volume data, time-of-day patterns, and real-time occupancy signals to recommend the optimal care pathway for your situation: ER, walk-in, telehealth, or pharmacy. It tells you where to go, how long you will wait, and why, before you leave home.</p>
+      <div class="cs-chips"><span class="cs-chip">ML / Random Forest</span><span class="cs-chip">Real-time APIs</span><span class="cs-chip">Healthcare</span><span class="cs-chip">B2B and B2C</span></div>
+    </div>
+    <div class="cs-card reveal d2">
+      <span class="cs-pill">Coming Soon</span>
+      <h3 class="cs-name">GlazeIQ</h3>
+      <p class="cs-tag">Hyperlocal Winter Road Safety Intelligence</p>
+      <p class="cs-desc">Every Canadian winter, thousands of accidents happen on roads that were passable thirty minutes earlier. GlazeIQ combines Environment Canada weather data, IoT road sensors, historical accident records, and crowdsourced driver reports to generate street-level ice risk predictions updated every 15 minutes. A spatial ML model gives municipal fleet operators, school boards, and commuters a genuinely useful risk map, not just a weather forecast.</p>
+      <div class="cs-chips"><span class="cs-chip">Spatial ML</span><span class="cs-chip">IoT Sensors</span><span class="cs-chip">GIS</span><span class="cs-chip">B2B and B2G</span></div>
+    </div>
+    <div class="cs-card reveal d3">
+      <span class="cs-pill">Coming Soon</span>
+      <h3 class="cs-name">Berth</h3>
+      <p class="cs-tag">AI Settlement Navigator for Newcomers to Canada</p>
+      <p class="cs-desc">Canada welcomes over 500,000 immigrants annually. Settlement services are fragmented, generic, and often inaccessible. Berth ingests a newcomer's skills, background, language, and goals, then delivers personalised recommendations for jobs, neighbourhoods, and community networks. Unlike static government resources, Berth learns from real outcome data to improve its recommendations over time.</p>
+      <div class="cs-chips"><span class="cs-chip">Recommendation Systems</span><span class="cs-chip">Multilingual NLP</span><span class="cs-chip">B2G and B2C</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <p class="sl reveal">05 Writing</p>
+  <h2 class="st reveal">Curated <em>Articles</em></h2>
+  <div class="sr reveal"></div>
+  <p class="skill-intro reveal" style="margin-bottom:28px">I write about data science, healthcare analytics, and the craft of turning messy data into decisions that matter.</p>
+  <div class="drag-hint reveal"><svg viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3"/></svg>Drag to explore</div>
+  <div class="art-wrap" id="art-wrap">
+    <div class="art-track" id="art-track">
+      <a class="art-card" href="https://moyedeles.medium.com/optimising-clinic-placement-with-mixed-integer-linear-programming-a066add2bb15" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Operations Research &middot; Healthcare</span><h3 class="art-title">Optimising Clinic Placement with Mixed Integer Linear Programming</h3><p class="art-desc">How a MILP model using demographic and geographic data turned strategic clinic site decisions from intuition into rigorous science.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/predicting-blood-shortages-before-they-happen-9d0b30e569c6" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Healthcare &middot; Supply Chain</span><h3 class="art-title">Predicting Blood Shortages Before They Happen</h3><p class="art-desc">How NLP, Random Forest, and a deep respect for clinical messiness built a blood demand forecasting system that works in production.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/monte-carlo-for-non-mathematicians-what-2-000-simulations-taught-me-993e4f16b944" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Simulation &middot; Statistics</span><h3 class="art-title">Monte Carlo for Non-Mathematicians: What 2,000 Simulations Taught Me</h3><p class="art-desc">Running thousands of simulations per clinic to forecast shortfall risk taught me more about uncertainty than any textbook ever could.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/the-hidden-cost-of-clinical-data-messiness-and-how-nlp-fixes-it-f960c6d92f07" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">NLP &middot; Healthcare Data</span><h3 class="art-title">The Hidden Cost of Clinical Data Messiness and How NLP Fixes It</h3><p class="art-desc">Abbreviations, typos, inconsistent coding. Clinical data messiness has real operational costs. Here is how TF-IDF and fuzzy matching clean it up at scale.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/why-your-power-bi-dashboard-is-being-ignored-and-how-to-fix-it-c171ad3165d6" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Power BI &middot; Data Storytelling</span><h3 class="art-title">Why Your Power BI Dashboard Is Being Ignored (And How to Fix It)</h3><p class="art-desc">Most BI dashboards are technically correct and completely useless. The gap between ignored and indispensable is rarely about the data.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/from-nigeria-to-canada-a-decade-in-data-science-9598a5ca488e" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Career &middot; Data Science</span><h3 class="art-title">From Nigeria to Canada: A Decade in Data Science</h3><p class="art-desc">Three degrees, two continents, one pattern. The skills that transfer between contexts and the assumptions that absolutely do not.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/how-long-does-it-take-a-nigerian-graduate-to-find-work-a612f5806c9e" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Statistics &middot; Labour Economics</span><h3 class="art-title">How Long Does It Take a Nigerian Graduate to Find Work?</h3><p class="art-desc">A survival analysis reveals who finds jobs quickly, who waits longest, and what factors genuinely make the difference.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+      <a class="art-card" href="https://moyedeles.medium.com/what-predicts-survival-in-hypertensive-patients-lessons-from-a-nigerian-teaching-hospital-44f256731089" target="_blank" rel="noopener">
+        <div class="art-top"><span class="art-cat">Clinical Analytics &middot; Public Health</span><h3 class="art-title">What Predicts Survival in Hypertensive Patients?</h3><p class="art-desc">Age, not gender or length of stay, emerges as the primary predictor. Lessons from 320 patients at a Nigerian teaching hospital.</p></div>
+        <div class="art-bot"><span class="art-meta">Published &middot; Medium</span><span class="art-badge pub">Published</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY + REVIEWS -->
+<section id="jr">
+  <div class="reveal">
+    <p class="sl">06 Experience and Feedback</p>
+    <h2 class="st">My Journey and <em>Project Reviews</em></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="jr-grid">
+    <div class="journey-col">
+      <h3 class="jr-h">My <em>Journey</em></h3>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-period">Sep 2022 to Present</div><div class="tl-role">Data Scientist</div><div class="tl-org">Canadian Blood Services &middot; Calgary, AB</div><ul class="tl-list"><li>Designed and deployed an NLP-powered clinical translation portal using TF-IDF and K-Nearest Neighbours to standardise messy clinical abbreviations into CIHI codes, powering a Random Forest blood demand forecasting system with quantified confidence intervals.</li><li>Built real-time Diagnostic and Predictive portals pulling live data from Azure Synapse, classifying clinics as Normal, Warning, or Critical and running 2,000 Monte Carlo simulations per clinic to forecast future shortfall risk, feeding a proactive Call-to-Action framework.</li><li>Created a Mixed Integer Linear Programming (MILP) model using demographic, geographic, and historical donation data to identify underutilised donor potential and guide strategic clinic site placement decisions at FSA level.</li><li>Conducted a comprehensive seasonality analysis using STL decomposition across all Donor Appointments dataset variables, delivering actionable insights that directly inform scheduling efficiency and collection targets during peak and off-peak periods.</li><li>Applied supervised ML to develop donor appointment attendance and cancellation prediction models, resulting in a 20% increase in donor appointment attendance.</li><li>Built a geographic ML model to estimate active donor populations in potential new blood collection sites, supporting strategic planning and marketing operations.</li></ul></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-period">Jul 2017 to Dec 2021</div><div class="tl-role">Data Scientist</div><div class="tl-org">Nigeria Inter-Bank Settlement System (NIBSS) &middot; Lagos</div><ul class="tl-list"><li>Designed and deployed a deep neural network achieving 97.84% annual product volume forecast accuracy, enabling efficient resource allocation during peak periods and driving 100% service uptime year-round while saving the company 52% in avoidable resource expenditure.</li><li>Independently built a machine learning system that predicted COVID-19 RT-PCR test results in patients exhibiting other epidemiological diseases with over 80% accuracy.</li><li>Architected and managed a Business Intelligence data warehouse enabling fact-based decision-making and ad hoc analysis across the organisation, contributing to an 85% improvement in revenue outcomes.</li><li>Led a full revamp of Excel-based reporting by developing and managing Power BI and Tableau dashboards, improving the acceptance and quality of internal and external stakeholder reports by 95%.</li></ul></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-period">Jun 2017 to Jul 2017</div><div class="tl-role">Research Analyst</div><div class="tl-org">The Education Partnership (TEP) Centre &middot; Lagos</div><ul class="tl-list"><li>Developed a structured data collection framework for the research, design, implementation, and evaluation of education programmes across Nigeria's public, private, and non-profit sectors.</li><li>Automated the quality validation process for all research data elements and reporting outputs, reducing the probability of human error to zero and significantly improving the reliability and turnaround time of research deliverables.</li></ul></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-period">Nov 2014 to Oct 2016</div><div class="tl-role">Graduate Research Assistant</div><div class="tl-org">University of Ilorin, Dept of Statistics &middot; Ilorin</div><ul class="tl-list"><li>Supported senior lecturers in active research development including research design, research proposals, and data analysis using Excel, SPSS, and R programming.</li><li>Developed the framework for the implementation of digitised examinations for first-year statistics students.</li><li>Served as subject coordinator for STA 124 (Introductory Probability and Statistics), independently developing all course materials and delivering tutorials, practicals, workshops, and studio sessions to a 98% positive student feedback rating.</li></ul></div>
+      </div>
+    </div>
+    <div class="reviews-col">
+      <h3 class="jr-h">Project <em>Reviews</em></h3>
+      <div class="rv-vp">
+        <div class="rv-track" id="rv-track">
+          <div class="rv-card"><p class="rv-text">The NLP blood demand portal Moses built is unlike anything I have seen in healthcare analytics. It took a problem we had lived with for years and made it disappear. The confidence intervals gave our inventory team something they had never had before: a number they could actually trust.</p><div class="rv-name">Project Supervisor</div><div class="rv-proj">NLP Blood Demand Forecasting Portal</div></div>
+          <div class="rv-card"><p class="rv-text">The Diagnostic and Predictive portals transformed how we operate. What used to take days of manual investigation now happens automatically, in real time. The CTA framework has shifted our whole approach from reactive to preventive.</p><div class="rv-name">Analytics Director</div><div class="rv-proj">Under Collections Diagnostic and Predictive Portals</div></div>
+          <div class="rv-card"><p class="rv-text">The MILP clinic placement model gave us a rigorous, data-driven framework for decisions we previously made on intuition alone. The FSA-level analysis surfaced donor potential we had simply not seen before.</p><div class="rv-name">Programme Lead</div><div class="rv-proj">Clinic Sites Selection and Optimisation</div></div>
+          <div class="rv-card"><p class="rv-text">Moses brought a level of statistical rigour to our seasonality work that immediately elevated the quality of our planning conversations. The insights now directly shape our appointment scheduling targets every quarter.</p><div class="rv-name">Research Director</div><div class="rv-proj">Donor Appointments Seasonality Analysis</div></div>
+          <div class="rv-card"><p class="rv-text">The deep neural network Moses built at NIBSS achieved 97.84% forecast accuracy and contributed directly to 100% service uptime. What impressed me most was how he translated a complex technical solution into clear business outcomes that every stakeholder could understand.</p><div class="rv-name">BI Programme Lead</div><div class="rv-proj">NIBSS Product Volume Forecasting</div></div>
+          <div class="rv-card"><p class="rv-text">Moses delivered a Power BI solution of exceptional depth. Complex national insolvency data that once lived in spreadsheets is now a living, interactive dashboard that our policy team uses weekly. The executive layer is exactly what our leadership needed.</p><div class="rv-name">Executive Sponsor</div><div class="rv-proj">National Insolvency Analytics Portal</div></div>
+          <div class="rv-card"><p class="rv-text">Working with Moses on donor experience analytics was one of the more productive partnerships I have been part of. He combines rare technical depth with genuine curiosity about the business problem. The attendance prediction model changed how we plan collections.</p><div class="rv-name">Operations Manager</div><div class="rv-proj">Donor Experience Analytics</div></div>
+          <div class="rv-card"><p class="rv-text">The financial dashboards Moses built told a story with data that no spreadsheet ever could. The clarity of insight enabled real policy conversations that previously would have required weeks of report preparation.</p><div class="rv-name">Programme Manager</div><div class="rv-proj">Financial Industry Performance Dashboards</div></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="rv-card"><p class="rv-text">The NLP blood demand portal Moses built is unlike anything I have seen in healthcare analytics. It took a problem we had lived with for years and made it disappear. The confidence intervals gave our inventory team something they had never had before: a number they could actually trust.</p><div class="rv-name">Project Supervisor</div><div class="rv-proj">NLP Blood Demand Forecasting Portal</div></div>
+          <div class="rv-card"><p class="rv-text">The Diagnostic and Predictive portals transformed how we operate. What used to take days of manual investigation now happens automatically, in real time. The CTA framework has shifted our whole approach from reactive to preventive.</p><div class="rv-name">Analytics Director</div><div class="rv-proj">Under Collections Diagnostic and Predictive Portals</div></div>
+          <div class="rv-card"><p class="rv-text">The MILP clinic placement model gave us a rigorous, data-driven framework for decisions we previously made on intuition alone. The FSA-level analysis surfaced donor potential we had simply not seen before.</p><div class="rv-name">Programme Lead</div><div class="rv-proj">Clinic Sites Selection and Optimisation</div></div>
+          <div class="rv-card"><p class="rv-text">Moses brought a level of statistical rigour to our seasonality work that immediately elevated the quality of our planning conversations. The insights now directly shape our appointment scheduling targets every quarter.</p><div class="rv-name">Research Director</div><div class="rv-proj">Donor Appointments Seasonality Analysis</div></div>
+          <div class="rv-card"><p class="rv-text">Working with Moses on donor experience analytics was one of the more productive partnerships I have been part of. He combines rare technical depth with genuine curiosity about the business problem. The attendance prediction model changed how we plan collections.</p><div class="rv-name">Operations Manager</div><div class="rv-proj">Donor Experience Analytics</div></div>
+          <div class="rv-card"><p class="rv-text">Moses delivered a Power BI solution of exceptional depth. Complex national insolvency data that once lived in spreadsheets is now a living, interactive dashboard that our policy team uses weekly.</p><div class="rv-name">Executive Sponsor</div><div class="rv-proj">National Insolvency Analytics Portal</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="edu">
+  <p class="sl reveal">07 Credentials</p>
+  <h2 class="st reveal">Education and <em>Qualifications</em></h2>
+  <div class="sr reveal"></div>
+  <div class="edu-track">
+    <div class="edu-items">
+      <div class="edu-item"><div class="edu-dot"></div><div class="edu-yr">2022 to 2023</div><h3 class="edu-sch">Aston University<em>Birmingham, United Kingdom</em></h3><p class="edu-deg">Master of Science in Data Analytics</p><span class="edu-badge">Merit</span></div>
+      <div class="edu-item"><div class="edu-dot"></div><div class="edu-yr">2015 to 2018</div><h3 class="edu-sch">University of Ilorin<em>Ilorin, Nigeria</em></h3><p class="edu-deg">Master of Science in Statistics</p><span class="edu-badge">Distinction</span></div>
+      <div class="edu-item"><div class="edu-dot"></div><div class="edu-yr">2010 to 2014</div><h3 class="edu-sch">University of Ilorin<em>Ilorin, Nigeria</em></h3><p class="edu-deg">Bachelor of Science in Statistics</p><span class="edu-badge">First Class Honours</span></div>
+    </div>
+  </div>
+  <div class="cv-row reveal">
+    <p class="cv-label">Full work history, certifications, and references available on request or via CV download.</p>
+    <a href="https://drive.google.com/file/d/1f-BsBeDj9H0U6FH7MqM1MWXu4o3aBl4b/view?usp=sharing" target="_blank" rel="noopener" class="btn-a">Download CV / Resume <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="con-inner reveal">
+    <p class="con-pre">08 Get in touch</p>
+    <h2 class="con-h">Have data<br>to <em>decode?</em></h2>
+    <p class="con-sub">Open to senior data science, analytics, and BI leadership roles.<br>Always happy to talk about interesting problems.</p>
+    <a href="#" class="con-email" id="con-email-lnk"></a>
+    <p class="book-line">
+      <a href="https://cal.com/deleolayinka" target="_blank" rel="noopener" class="book-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a Call
+      </a>
+    </p>
+    <div class="soc-row">
+      <a href="https://linkedin.com/in/moyedele" target="_blank" rel="noopener" class="soc-link">LinkedIn</a>
+      <a href="https://github.com/deleolayinka" target="_blank" rel="noopener" class="soc-link">GitHub</a>
+      <a href="https://moyedele.medium.com/" target="_blank" rel="noopener" class="soc-link">Medium</a>
+      <a href="https://x.com/mrolayinka_?s=21&t=GQJwOcW8DqBJMCPDqQlJ0w" target="_blank" rel="noopener" class="soc-link">X</a>
+      <a href="https://instagram.com/mr.olayinka" target="_blank" rel="noopener" class="soc-link">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-logo" aria-label="Moses Oyedele">
+    <svg width="78" height="28" viewBox="0 0 92 33" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle">
+      <!-- MO monogram (static, same design as nav) -->
+      <polyline points="2,28 2,6 10,17 16,6"
+        stroke="var(--accent)" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="26" cy="17" r="11"
+        stroke="var(--accent)" stroke-width="2.5" fill="none"/>
+      <!-- Axes -->
+      <line x1="37" y1="28" x2="37" y2="4" stroke="var(--accent)" stroke-width="0.65" opacity="0.24"/>
+      <line x1="37" y1="28" x2="88" y2="28" stroke="var(--accent)" stroke-width="0.65" opacity="0.24"/>
+      <!-- Confidence bands -->
+      <line x1="40" y1="23" x2="83" y2="4" stroke="var(--accent)" stroke-width="0.6" opacity="0.16" stroke-dasharray="2 3"/>
+      <line x1="40" y1="29" x2="83" y2="10" stroke="var(--accent)" stroke-width="0.6" opacity="0.16" stroke-dasharray="2 3"/>
+      <!-- Trend line (static in footer) -->
+      <line x1="40" y1="26" x2="84" y2="6" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- All dots visible immediately in footer -->
+      <circle cx="44" cy="24" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <circle cx="51" cy="21" r="2.0" fill="var(--accent)" opacity="0.75"/>
+      <circle cx="58" cy="17" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <circle cx="65" cy="14" r="2.0" fill="var(--accent)" opacity="0.75"/>
+      <circle cx="72" cy="11" r="2.0" fill="var(--accent)" opacity="0.65"/>
+      <!-- Peak: oscillates in footer too via CSS animation on the element -->
+      <circle class="logo-peak" cx="79" cy="8" r="2.6" fill="var(--accent)" style="opacity:1;animation:peakPulse 2.6s ease-in-out infinite"/>
+    </svg>
+  </span>
+  <span>2025 Moses Oyedele. All rights reserved.</span>
+  <span>deleolayinka.com</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* PROJECT DATA */
+var P={
+  nlp:{n:'01 / NLP and Machine Learning',b:'End-to-End ML System',t:'NLP-Driven Supply Chain Optimization',e:'Blood Demand Forecasting Portal',
+    o:'Designed and deployed an end-to-end machine learning portal at Canadian Blood Services that solves a critical supply chain challenge: clinical staff write procedure names in dozens of inconsistent abbreviated formats, making demand forecasting nearly impossible.',
+    d:'The system uses TF-IDF vectorisation combined with K-Nearest Neighbours to translate messy, abbreviated clinical inputs into standardised CIHI procedure codes. These clean codes feed a Random Forest regression model trained on historical blood transfusion volumes, producing demand forecasts with quantified confidence intervals. The portal supports both single-search and bulk-file-processing modes, allowing clinical staff to interpret individual entries or process entire datasets at once. Deployed via Streamlit for organisation-wide access.',
+    i:'Directly supports elimination of blood product stock-outs while reducing over-ordering waste. Confidence intervals on every prediction give inventory managers a quantified risk range rather than a single opaque number.',
+    tags:['Python','NLP / TF-IDF','K-Nearest Neighbours','Random Forest','Scikit-learn','Pandas','Streamlit','CIHI Codes','Supply Chain Analytics'],link:null,note:'Internal deployment &middot; Canadian Blood Services &middot; Proprietary system'},
+  diagnostic:{n:'02 / Diagnostic Portal',b:'Operational Analytics',t:'Under Collections',e:'Clinic Diagnostic Portal',
+    o:'A real-time diagnostic system that identifies and explains appointment collection shortfalls across the Canadian Blood Services clinic network, replacing a fragmented legacy process with a live, self-contained HTML portal.',
+    d:'The portal connects directly to Azure Synapse Analytics via token-authenticated ODBC to pull live booking, attendance, no-show, and deferral data. A Python classification engine processes this data to assign each clinic a status: Normal, Warning, or Critical. For every underperforming clinic, the system automatically surfaces the primary driver, whether shortfalls stem from excess no-shows, high deferral rates, booking shortfalls, or demographic shifts. Delivered as a single self-contained HTML file requiring no server or infrastructure on the recipient side.',
+    i:'Transformed a reactive, manual investigation process into a proactive, self-service diagnostic tool. Clinical operations teams can now identify at-risk clinics within minutes of data refresh rather than waiting for end-of-month reviews.',
+    tags:['Python','Azure Synapse','ODBC / Token Auth','Pandas','NumPy','Plotly','HTML Portal','Operational Analytics'],link:null,note:'Internal deployment &middot; Canadian Blood Services &middot; Proprietary system'},
+  predictive:{n:'03 / Predictive Portal',b:'Predictive Modelling',t:'Under Collections Predictive Portal',e:'and Call-to-Action Framework',
+    o:'Built on top of the Diagnostic Portal, this system shifts the organisation from reactive triage to preventive planning, forecasting collection shortfalls before they occur and prescribing specific interventions.',
+    d:'For each clinic, the engine runs 2,000 Monte Carlo simulations incorporating historical variability, seasonal patterns, and current trajectory, producing a full probability distribution of future outcomes rather than a single forecast. A Damped Holt-Winters exponential smoothing model provides the central forecast, while residual bootstrap resampling generates empirically calibrated confidence bands. When a forecast indicates high probability of falling below the critical threshold, the CTA framework triggers, recommending specific interventions based on the root cause from the Diagnostic layer.',
+    i:'Shifted the operational model from monthly reactive reviews to weekly proactive interventions. Early results showed measurable improvement in collection yield at clinics that received CTA recommendations before shortfalls materialised.',
+    tags:['Python','Monte Carlo Simulation x2,000','Holt-Winters','Bootstrap CI','Azure Synapse','Plotly','HTML Portal','Predictive Analytics'],link:null,note:'Internal deployment &middot; Canadian Blood Services &middot; Proprietary system'},
+  milp:{n:'04 / Optimisation and GIS',b:'Operations Research',t:'Clinic Sites Selection',e:'and Optimisation',
+    o:'A Mixed Integer Linear Programming model that uses demographic, geographic, and historical donation data to forecast active donor populations within specific Forward Sortation Areas, guiding strategic placement of blood collection clinic sites.',
+    d:'The MILP formulation defines an objective function that maximises estimated donor yield across selected sites while respecting constraints on budget, travel distance for donors, and minimum coverage requirements per FSA. Demographic census data, historical donation rates by area, and geographic accessibility scores are combined to build donor potential estimates at FSA granularity. The model is implemented in Python using PuLP and integrated with GeoPandas for spatial visualisation. Output is a ranked recommendation of FSAs for new or relocated clinic sites, with sensitivity analysis showing how the solution changes under different constraint parameters.',
+    i:'Provided a rigorous, quantitative foundation for clinic placement decisions that were previously made on institutional intuition. The model identified specific FSAs with significant untapped donor potential that were not visible through conventional approaches.',
+    tags:['Python','MILP / PuLP','GeoPandas','Demographic Analysis','FSA Mapping','Census Data','Operations Research','Spatial Analytics'],link:null,note:'Internal deployment &middot; Canadian Blood Services &middot; Proprietary system'},
+  seasonality:{n:'05 / Seasonality Analytics',b:'Time Series Analysis',t:'Donor Appointments',e:'Seasonality Analysis',
+    o:'A comprehensive seasonality analysis across all variables in the Donor Appointments dataset to identify seasonal trends, cyclical drivers, and peak versus off-peak patterns across the CBS clinic network.',
+    d:'The analysis applied STL (Seasonal and Trend decomposition using LOESS) to decompose time series components across key metrics including appointment booking volumes, attendance rates, no-show rates, deferral rates, and collection yield. Autocorrelation and partial autocorrelation analysis identified the dominant seasonal periods. Holiday effects and special event impacts were isolated and controlled for. Results were delivered as an interactive Plotly dashboard showing both national aggregate patterns and clinic-level seasonal profiles, accompanied by a written recommendations report for the planning team.',
+    i:'Findings directly inform appointment scheduling models and collection targets. The analysis demonstrated that peak collection periods are concentrated in specific months, enabling more accurate resource planning and yield targets during both high and low demand periods.',
+    tags:['Python','STL Decomposition','Time Series Analysis','Autocorrelation Analysis','Pandas','NumPy','Plotly','Planning Analytics'],link:null,note:'Internal deployment &middot; Canadian Blood Services &middot; Proprietary system'},
+  insolvency:{n:'06 / Power BI Dashboard',b:'Enterprise BI',t:'National Insolvency',e:'Analytics Portal',
+    o:'Enterprise-grade Power BI dashboards providing comprehensive insight into Canadian insolvency trends for national-level strategic and policy decision-making.',
+    d:'The portal breaks down insolvency filings across multiple dimensions: province, industry sector, insolvency type, and temporal patterns. Complex DAX measures calculate year-over-year trends, regional benchmarks, and sector-specific concentration metrics. The dashboard has two layers: an executive summary view for senior leadership, and a drill-down analytical layer for policy teams needing granular exploration.',
+    i:'Empowered policy and strategy teams with a single source of truth for national insolvency intelligence, replacing fragmented spreadsheet-based reporting.',
+    tags:['Microsoft Power BI','DAX','Data Modelling','Enterprise Dashboards','Policy Analytics','Data Storytelling'],
+    link:'https://app.powerbi.com/view?r=eyJrIjoiOGZjMjE4ZDYtOWIzYi00MzVhLTg5ZGYtZjM4OTA2MmUzOTQ4IiwidCI6Ijc1NzZkZWMwLTVkODktNDRkNS1hNTllLTg5NGJjMmM2YWVlNCJ9&pageName=a23fded8378f9e52436d',ll:'View Live Dashboard',note:null},
+  'nigeria-fin':{n:'07 / Power BI',b:'Earlier Work',t:'Nigerian Financial Industry',e:'Performance Dashboard',
+    o:'A comprehensive Power BI dashboard that distilled large-scale financial sector data into actionable insights for decision-makers across Nigeria\'s banking and financial industry.',
+    d:'Designed in collaboration with Farouk Gbadamosi, this dashboard aggregated performance data across multiple financial institutions and product lines, enabling comparative analysis and trend identification. Custom DAX measures calculated KPIs including market share movement, product penetration rates, and period-over-period performance changes.',
+    i:'Provided a unified view of industry performance that previously required hours of manual data compilation, guiding strategic decisions around product positioning and market expansion.',
+    tags:['Power BI','DAX','Financial Analytics','Data Modelling','Executive Reporting'],
+    link:'https://drive.google.com/file/d/18H8WghqLokL5bX59RC4hGoTOD8ra011E/view?usp=sharing',ll:'View Dashboard',note:null},
+  'fin-inclusion':{n:'08 / Power BI',b:'Earlier Work',t:'Financial Inclusion',e:'Dashboard',
+    o:'A Power BI dashboard measuring the progress of government and private-sector initiatives in bringing Nigeria\'s underbanked population into the formal financial system.',
+    d:'The dashboard tracks financial inclusion metrics across demographic groups, geographic regions, and product types, mapping where progress has been made and where gaps remain largest.',
+    i:'Provided stakeholders with clear visibility into inclusion gaps, supporting evidence-based advocacy and programme targeting.',
+    tags:['Power BI','Policy Analytics','DAX','Data Storytelling'],
+    link:'https://drive.google.com/file/d/1L4nbprPQxKo3eBQyQE_AM9k7UtqewlFH/view?usp=sharing',ll:'View Dashboard',note:null},
+  unemployment:{n:'09 / Research',b:'Published Research',t:'Survival Analysis:',e:'Youth Unemployment in Nigeria',
+    o:'A statistical study modelling the duration of unemployment for young university graduates in Nigeria using survival analysis techniques.',
+    d:'This study applied Kaplan-Meier estimation and Cox Proportional Hazards regression in R to model time-to-employment as a survival problem. The analysis revealed that field of study, geographic location, and family socioeconomic background were significant predictors of employment duration.',
+    i:'Provided empirical evidence challenging common assumptions about graduate employability, contributing to discourse on labour market policy for Nigerian youth.',
+    tags:['R','Survival Analysis','Kaplan-Meier','Cox Regression','Statistical Modelling','Labour Economics'],
+    link:'https://moyedeles.medium.com/explorative-study-of-duration-of-unemployment-in-nigeria-ab53d34b9d7b',ll:'Read on Medium',note:null},
+  hypertension:{n:'10 / Clinical Research',b:'Published Research',t:'Statistical Analysis of',e:'Hypertensive Patient Data',
+    o:'A clinical data study applying logistic regression to identify the key factors contributing to patient outcomes in hypertension cases at a Nigerian teaching hospital.',
+    d:'Using patient records from the University of Ilorin Teaching Hospital, this study built a logistic regression model in R to identify significant predictors of adverse outcomes among hypertensive patients. Variables included age, BMI, medication adherence, comorbidities, and socioeconomic indicators. Model performance was evaluated using ROC analysis and cross-validation.',
+    i:'Identified a small set of high-impact risk factors that could guide clinical screening priorities, contributing to evidence-based clinical decision-making.',
+    tags:['R','Logistic Regression','Clinical Data','ROC Analysis','Statistical Inference'],
+    link:'https://moyedeles.medium.com/the-statistical-analysis-of-data-on-hypertensive-patients-79a542d7b12b',ll:'Read on Medium',note:null},
+  bikeshare:{n:'11 / Python',b:'Data Exploration',t:'US Bikeshare',e:'Data Exploration',
+    o:'A Python command-line application for interactive exploration of US bikeshare data across multiple cities, computing descriptive statistics on filtered datasets.',
+    d:'Built as part of the Udacity Data Science programme, this project loads and processes bikeshare datasets from Chicago, New York City, and Washington. Users filter by city, month, and day of week through an interactive CLI, after which the application computes trip duration statistics, station popularity metrics, user type breakdowns, and temporal usage patterns using Pandas and NumPy.',
+    i:'Demonstrated practical data manipulation and exploratory analysis skills in Python, from raw CSV ingestion through to meaningful statistical summaries.',
+    tags:['Python','Pandas','NumPy','CLI','Descriptive Statistics','EDA'],
+    link:'https://github.com/deleolayinka/Udacity_Bikeshare_Project',ll:'View on GitHub',note:null},
+  sakila:{n:'12 / SQL',b:'Data Exploration',t:'Sakila Movie Database',e:'SQL Exploration',
+    o:'A deep SQL investigation of the Sakila DVD-rental database, answering key business questions through complex multi-table queries and visual outputs.',
+    d:'This project explored the Sakila sample database using multi-join queries, subqueries, window functions, and aggregations to answer questions about rental patterns, customer value, staff performance, and inventory turnover.',
+    i:'Demonstrated SQL proficiency from basic querying through advanced analytical patterns, with a focus on translating business questions into precise SQL logic.',
+    tags:['SQL','Data Exploration','Window Functions','Aggregations','Visualization'],
+    link:'https://github.com/deleolayinka/Udacity_SakilaMovieDatabase_Project',ll:'View on GitHub',note:null}
+};
+
+function openProject(id){
+  var p=P[id];if(!p)return;
+  var tags=p.tags.map(function(t){return'<span class="tag">'+t+'</span>';}).join('');
+  var link=p.link?'<a href="'+p.link+'" target="_blank" rel="noopener" class="ov-link">'+p.ll+' <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>':'';
+  var note=p.note?'<span class="ov-note">'+p.note+'</span>':'';
+  document.getElementById('ov-body').innerHTML=
+    '<div class="ov-num">'+p.n+'</div>'
+    +'<h2 class="ov-title">'+p.t+'<br><em>'+p.e+'</em></h2>'
+    +'<span class="ov-badge">'+p.b+'</span>'
+    +'<div class="ov-div"></div>'
+    +'<p class="ov-sl">Overview</p><p class="ov-txt">'+p.o+'</p>'
+    +'<p class="ov-sl">How It Works</p><p class="ov-txt">'+p.d+'</p>'
+    +'<div class="ov-impact"><p class="ov-sl" style="margin-bottom:8px">Impact and Outcome</p><p><strong>'+p.i+'</strong></p></div>'
+    +'<div class="ov-div"></div>'
+    +'<p class="ov-sl">Technologies</p><div class="ov-tags">'+tags+'</div>'
+    +link+note;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.querySelector('.ov-panel').scrollTop=0;
+}
+function closeOverlay(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('ov-x').addEventListener('click',closeOverlay);
+document.getElementById('ov-back').addEventListener('click',closeOverlay);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay();});
+
+/* THEME */
+(function(){
+  var html=document.documentElement,btn=document.getElementById('theme-toggle');
+  var saved=localStorage.getItem('mo-theme')||'dark';
+  html.setAttribute('data-theme',saved);
+  btn.addEventListener('click',function(){
+    var next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+    html.setAttribute('data-theme',next);
+    localStorage.setItem('mo-theme',next);
+    updatePColor();
+  });
+})();
+
+/* CANVAS (dark mode particle network) */
+var pc={r:201,g:168,b:76};
+function updatePColor(){pc=document.documentElement.getAttribute('data-theme')==='dark'?{r:201,g:168,b:76}:{r:201,g:79,b:44};}
+(function(){
+  var cv=document.getElementById('hero-canvas'),ctx=cv.getContext('2d'),W,H,pts=[];
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;}
+  function Pt(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.3+.4;this.a=Math.random()*.28+.06;}
+  Pt.prototype.move=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1;};
+  Pt.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle='rgba('+pc.r+','+pc.g+','+pc.b+','+this.a+')';ctx.fill();};
+  function init(){resize();pts=[];var n=Math.min(Math.floor(W*H/14000),85);for(var i=0;i<n;i++)pts.push(new Pt());}
+  function edges(){for(var i=0;i<pts.length;i++){for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<145){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba('+pc.r+','+pc.g+','+pc.b+','+(1-d/145)*.065+')';ctx.lineWidth=.6;ctx.stroke();}}}}
+  function loop(){ctx.clearRect(0,0,W,H);pts.forEach(function(p){p.move();p.draw();});edges();requestAnimationFrame(loop);}
+  window.addEventListener('resize',init);updatePColor();init();loop();
+})();
+
+/* NAV + PROGRESS */
+window.addEventListener('scroll',function(){
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>40);
+  var total=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('progress').style.width=(window.scrollY/total*100)+'%';
+});
+
+/* TYPEWRITER */
+(function(){
+  var lines=['Data Scientist at Canadian Blood Services','Machine Learning Engineer','Business Intelligence Specialist','Statistical Modelling Expert','Power BI Dashboard Architect','Predictive Analytics Lead'];
+  var el=document.getElementById('tw-text'),li=0,ci=0,del=false;
+  function tick(){var line=lines[li];if(!del){el.textContent=line.slice(0,++ci);if(ci===line.length){del=true;return setTimeout(tick,2600);}setTimeout(tick,42);}else{el.textContent=line.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;return setTimeout(tick,400);}setTimeout(tick,20);}}
+  setTimeout(tick,1800);
+})();
+
+/* COUNTER */
+function animateCount(el,t,s){var step=t/(1800/16),c=0;var iv=setInterval(function(){c=Math.min(c+step,t);el.textContent=Math.floor(c)+s;if(c>=t)clearInterval(iv);},16);}
+
+/* RINGS */
+var ringsGo=false;
+function fireRings(){document.querySelectorAll('.ring-fill').forEach(function(r){var p=parseInt(r.dataset.pct);r.style.strokeDashoffset=239*(1-p/100);});}
+
+/* DRAG SCROLL */
+(function(){
+  var w=document.getElementById('art-wrap');
+  var down=false,lx=0,lt=0,vel=0,anim=null;
+  w.style.overflowX='auto';w.style.scrollbarWidth='none';
+  var s=document.createElement('style');s.textContent='#art-wrap::-webkit-scrollbar{display:none}';document.head.appendChild(s);
+  w.addEventListener('mousedown',function(e){down=true;w.style.cursor='grabbing';lx=e.pageX;lt=Date.now();vel=0;if(anim){cancelAnimationFrame(anim);anim=null;}});
+  window.addEventListener('mouseup',function(){if(!down)return;down=false;w.style.cursor='grab';(function g(){vel*=.92;w.scrollLeft+=vel;if(Math.abs(vel)>.5)anim=requestAnimationFrame(g);else anim=null;})();});
+  window.addEventListener('mousemove',function(e){if(!down)return;e.preventDefault();var now=Date.now(),x=e.pageX,dx=x-lx;vel=dx/(now-lt||1)*16;lx=x;lt=now;w.scrollLeft-=dx;});
+  w.addEventListener('touchstart',function(e){lx=e.touches[0].pageX;lt=Date.now();vel=0;},{passive:true});
+  w.addEventListener('touchmove',function(e){var x=e.touches[0].pageX,now=Date.now(),dx=x-lx;vel=dx/(now-lt||1)*16;lx=x;lt=now;w.scrollLeft-=dx;},{passive:true});
+  w.addEventListener('touchend',function(){(function g(){vel*=.92;w.scrollLeft-=vel;if(Math.abs(vel)>.5)anim=requestAnimationFrame(g);else anim=null;})();});
+})();
+
+/* INTERSECTION OBSERVERS */
+var countersGo=false;
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal,.ring-item,.fc,.cc,.cs-card,.tl-item,.edu-item').forEach(function(el){io.observe(el);});
+
+var skillsIO=new IntersectionObserver(function(e){if(e[0].isIntersecting&&!ringsGo){ringsGo=true;fireRings();}},{threshold:.2});
+skillsIO.observe(document.getElementById('skills'));
+
+var heroIO=new IntersectionObserver(function(e){if(e[0].isIntersecting&&!countersGo){countersGo=true;document.querySelectorAll('.stat-n').forEach(function(el){var t=parseInt(el.dataset.target),s=el.dataset.suffix||'';setTimeout(function(){animateCount(el,t,s);},1600);});}},{threshold:.4});
+heroIO.observe(document.getElementById('hero'));
+
+
+/* EMAIL CONSTRUCTION - prevents Cloudflare obfuscation */
+(function(){
+  var u='deleolayinka',d='gmail.com';
+  var full=u+'@'+d;
+  var el=document.getElementById('con-email-lnk');
+  if(el){el.href='mailto:'+full;el.textContent=full;}
+})();
+
+/* ACTIVE NAV */
+var nls=document.querySelectorAll('.nav-links a');
+var navIO=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){nls.forEach(function(l){l.classList.remove('active');});var a=document.querySelector('.nav-links a[href="#'+x.target.id+'"]');if(a)a.classList.add('active');}});},{threshold:.35});
+document.querySelectorAll('section[id]').forEach(function(s){navIO.observe(s);});
+</script>
+</body>
+</html>
