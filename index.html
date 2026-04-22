@@ -142,7 +142,7 @@ section{padding:120px 8%}
 
 /* ABOUT */
 #about{background:var(--bg-surface)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-grid{display:block;max-width:820px}
 .about-lbl{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
 .about-h{font-family:'Fraunces',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;color:var(--text);margin-bottom:28px}
 .about-h em{font-style:italic;color:var(--accent)}
@@ -211,7 +211,7 @@ section{padding:120px 8%}
 #overlay{position:fixed;inset:0;z-index:1100;display:flex;align-items:stretch;opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.16,1,.3,1)}
 #overlay.open{opacity:1;pointer-events:all}
 .ov-back{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer}
-.ov-panel{position:relative;z-index:1;margin-left:auto;width:min(700px,100%);background:var(--bg);overflow-y:auto;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column}
+.ov-panel{position:relative;z-index:1;margin-left:auto;width:min(700px,100%);background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column}
 #overlay.open .ov-panel{transform:translateX(0)}
 .ov-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;background:var(--bg);border-bottom:1px solid var(--rule)}
 .ov-hl{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
@@ -397,7 +397,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
   .hamburger{display:flex}
   .mobile-menu{display:flex}
   .hero-name{font-size:clamp(3.8rem,15vw,7rem)}
-  .about-grid,.jr-grid{grid-template-columns:1fr;gap:52px}
+  .jr-grid{grid-template-columns:1fr;gap:52px}
   .rings{grid-template-columns:repeat(2,1fr);gap:36px}
   .fc-inner{grid-template-columns:1fr}.fc-vis{display:none}
   .cg{grid-template-columns:1fr}
@@ -416,7 +416,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
   .hero-name{font-size:clamp(3.2rem,17vw,5rem)}
   .hero-stats{gap:20px 28px}
   footer{flex-direction:column;gap:12px;text-align:center}
-  .fc{padding:48px 28px 36px}.fc::after{font-size:8rem;right:18px;top:-20px}
+  .fc{padding:76px 28px 36px}.fc::after{font-size:8rem;right:18px;top:14px}
   .cc{padding:36px 28px}
   .ov-title{font-size:1.7rem}
 }
@@ -608,9 +608,11 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
     <div class="reveal">
       <p class="about-lbl">Who I Am</p>
       <h2 class="about-h">A decade of turning<br><em>data into decisions.</em></h2>
-      <p class="about-p">I am a results-driven Data Scientist with over a decade of academic and professional experience in machine learning, statistical modelling, and business intelligence. I believe data only matters when it changes something, and I have spent my career making sure it does.</p>
-      <p class="about-p">Born in Nigeria, I earned my Bachelor and Masters of Science in Statistics at the University of Ilorin before completing a second Masters in Data Analytics at Aston University in Birmingham, UK. I now work as a Data Scientist at Canadian Blood Services in Calgary, where I build ML systems that directly impact the national blood supply chain.</p>
-      <p class="about-p">Prior to Canada, I spent over four years at Nigeria Inter-Bank Settlement System (NIBSS), where a deep neural network I deployed achieved 97.84% forecast accuracy and saved the company 52% in avoidable costs. I thrive at the intersection of rigorous statistical thinking and practical business impact.</p>
+      <p class="about-p">I am a Data Scientist and BI Specialist with over a decade of academic and professional experience spanning machine learning, statistical modelling, and business intelligence across three countries and two continents. I believe data only matters when it changes something, and I have spent my career making sure it does.</p>
+      <p class="about-p">Born and raised in Nigeria, I developed a rigorous foundation in statistics at the University of Ilorin, earning both a first-class Bachelor of Science and a Distinction-grade Master of Science in Statistics. Driven by a desire to operate at the frontier of applied data science, I pursued a second postgraduate degree in Data Analytics at Aston University in Birmingham, UK, graduating with Merit in 2023.</p>
+      <p class="about-p">My professional journey began at Nigeria Inter-Bank Settlement System (NIBSS) in Lagos, where I spent over four years building production ML systems for one of Africa's most critical financial infrastructure providers. A deep neural network I designed and deployed achieved 97.84% annual forecast accuracy on product volume prediction, enabling 100% service uptime year-round and eliminating 52% of avoidable resource expenditure. I also independently built a machine learning system that predicted COVID-19 RT-PCR test results with over 80% accuracy during the pandemic, and led a full organisation-wide BI transformation using Power BI and Tableau that improved stakeholder report acceptance by 95%.</p>
+      <p class="about-p">Since relocating to Calgary in 2022, I have worked as a Data Scientist at Canadian Blood Services, where I build ML systems that directly support the national blood supply chain. My work spans NLP-powered clinical data translation, real-time diagnostic and predictive portals, Monte Carlo simulation frameworks, Mixed Integer Linear Programming for strategic clinic placement, and supervised ML models that increased donor appointment attendance by 20%. These are not research projects: they are production systems used daily to ensure Canadians have access to the blood products they need.</p>
+      <p class="about-p">What sets me apart is the combination of statistical depth and engineering discipline. I do not just build models; I build systems that work reliably in production, communicate uncertainty clearly, and translate directly into decisions that stakeholders can act on. I thrive at the intersection of rigorous analytical thinking and practical, measurable business impact.</p>
       <div class="chips">
         <span class="chip">Machine Learning</span><span class="chip">Statistical Modelling</span>
         <span class="chip">Power BI</span><span class="chip">NLP</span>
@@ -618,15 +620,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
         <span class="chip">Azure Synapse</span><span class="chip">Healthcare Analytics</span>
       </div>
     </div>
-    <div class="reveal d2">
-      <div class="about-card">
-        <div class="ac-row"><span class="ac-label">Years Experience</span><span class="ac-val">10+</span></div>
-        <div class="ac-row"><span class="ac-label">Academic Degrees</span><span class="ac-val">3</span></div>
-        <div class="ac-row"><span class="ac-label">Projects Delivered</span><span class="ac-val">40+</span></div>
-        <div class="ac-row"><span class="ac-label">Cost Reduction Achieved</span><span class="ac-val">52%</span></div>
-        <div class="ac-row"><span class="ac-label">Location</span><span class="ac-val" style="font-size:1rem">Canada</span></div>
-      </div>
-    </div>
+
   </div>
 </section>
 
@@ -1208,10 +1202,21 @@ function openProject(id){
     +'<p class="ov-sl">Technologies</p><div class="ov-tags">'+tags+'</div>'
     +link+note;
   document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  var _sy=window.scrollY;
+  document.body.style.top='-'+_sy+'px';
+  document.body.style.position='fixed';
+  document.body.style.width='100%';
+  document.body.dataset.scrollY=_sy;
   document.querySelector('.ov-panel').scrollTop=0;
 }
-function closeOverlay(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function closeOverlay(){
+  document.getElementById('overlay').classList.remove('open');
+  var sy=parseInt(document.body.dataset.scrollY||'0',10);
+  document.body.style.position='';
+  document.body.style.top='';
+  document.body.style.width='';
+  window.scrollTo(0,sy);
+}
 document.getElementById('ov-x').addEventListener('click',closeOverlay);
 document.getElementById('ov-back').addEventListener('click',closeOverlay);
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay();});
