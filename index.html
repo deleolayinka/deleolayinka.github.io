@@ -175,7 +175,7 @@ section{padding:120px 8%}
 .epoch-l{flex:1;height:1px;background:linear-gradient(90deg,var(--ac-mid),transparent)}
 
 /* Featured cards - number stays faint always, no hover change */
-.fc{position:relative;overflow:hidden;background:var(--bg-card);border-left:3px solid var(--accent);padding:52px 56px;margin-bottom:2px;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1),background .3s,box-shadow .3s}
+.fc{position:relative;overflow:hidden;background:var(--bg-card);border-left:3px solid var(--accent);padding:52px 56px;margin-bottom:20px;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1),background .3s,box-shadow .3s}
 .fc.visible{opacity:1;transform:translateY(0)}
 /* Number is always faint via color, never changes */
 .fc::after{content:attr(data-n);position:absolute;top:-20px;right:44px;font-family:'Fraunces',Georgia,serif;font-size:13rem;font-weight:700;line-height:1;pointer-events:none;user-select:none;color:var(--ac-dim)}
@@ -416,7 +416,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
   .hero-name{font-size:clamp(3.2rem,17vw,5rem)}
   .hero-stats{gap:20px 28px}
   footer{flex-direction:column;gap:12px;text-align:center}
-  .fc{padding:36px 28px}.fc::after{font-size:8rem;right:18px}
+  .fc{padding:48px 28px 36px}.fc::after{font-size:8rem;right:18px;top:-20px}
   .cc{padding:36px 28px}
   .ov-title{font-size:1.7rem}
 }
@@ -1253,7 +1253,7 @@ window.addEventListener('scroll',function(){
 
 /* TYPEWRITER */
 (function(){
-  var lines=['Data Scientist at Canadian Blood Services','Machine Learning Engineer','Business Intelligence Specialist','Statistical Modelling Expert','Power BI Dashboard Architect','Predictive Analytics Lead'];
+  var lines=['Data Scientist','Machine Learning Engineer','Business Intelligence Specialist','Statistical Modelling Expert','Power BI Dashboard Architect','Predictive Analytics Lead'];
   var el=document.getElementById('tw-text'),li=0,ci=0,del=false;
   function tick(){var line=lines[li];if(!del){el.textContent=line.slice(0,++ci);if(ci===line.length){del=true;return setTimeout(tick,2600);}setTimeout(tick,42);}else{el.textContent=line.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;return setTimeout(tick,400);}setTimeout(tick,20);}}
   setTimeout(tick,1800);
