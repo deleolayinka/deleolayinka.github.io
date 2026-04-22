@@ -4,6 +4,51 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Moses Oyedele | Data Scientist and BI Specialist</title>
+<meta name="description" content="Moses Oyedele is a Data Scientist and BI Specialist at Canadian Blood Services in Calgary, Canada, with over a decade of experience in machine learning, statistical modelling, Power BI, and healthcare analytics."/>
+<meta name="keywords" content="Moses Oyedele, Data Scientist, Business Intelligence, Machine Learning, Power BI, Calgary, Canadian Blood Services, NLP, Monte Carlo, MILP, Healthcare Analytics, Python, R, SQL"/>
+<meta name="author" content="Moses Oyedele"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://deleolayinka.github.io/"/>
+<!-- Open Graph (LinkedIn, Facebook previews) -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://deleolayinka.github.io/"/>
+<meta property="og:title" content="Moses Oyedele | Data Scientist and BI Specialist"/>
+<meta property="og:description" content="A decade of turning data into decisions. Data Scientist at Canadian Blood Services, Calgary. Machine learning, healthcare analytics, Power BI."/>
+<meta property="og:image" content="https://deleolayinka.github.io/og-preview.png"/>
+<meta property="og:site_name" content="Moses Oyedele Portfolio"/>
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@mrolayinka_"/>
+<meta name="twitter:creator" content="@mrolayinka_"/>
+<meta name="twitter:title" content="Moses Oyedele | Data Scientist and BI Specialist"/>
+<meta name="twitter:description" content="A decade of turning data into decisions. Data Scientist at Canadian Blood Services, Calgary."/>
+<meta name="twitter:image" content="https://deleolayinka.github.io/og-preview.png"/>
+<!-- Structured data (Google rich results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Moses Oyedele",
+  "alternateName": "Moses Olayinka Oyedele",
+  "jobTitle": "Data Scientist",
+  "description": "Data Scientist and BI Specialist with over a decade of experience in machine learning, statistical modelling, and healthcare analytics.",
+  "url": "https://deleolayinka.github.io/",
+  "email": "deleolayinka@gmail.com",
+  "address": {"@type": "PostalAddress", "addressLocality": "Calgary", "addressRegion": "Alberta", "addressCountry": "CA"},
+  "sameAs": [
+    "https://linkedin.com/in/moyedele",
+    "https://github.com/deleolayinka",
+    "https://moyedele.medium.com/",
+    "https://x.com/mrolayinka_"
+  ],
+  "knowsAbout": ["Machine Learning", "Python", "R", "Power BI", "Statistical Modelling", "NLP", "Healthcare Analytics", "Monte Carlo Simulation", "Business Intelligence"],
+  "alumniOf": [
+    {"@type": "CollegeOrUniversity", "name": "Aston University"},
+    {"@type": "CollegeOrUniversity", "name": "University of Ilorin"}
+  ],
+  "worksFor": {"@type": "Organization", "name": "Canadian Blood Services"}
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
@@ -313,11 +358,10 @@ section{padding:120px 8%}
 .con-email:hover{color:var(--accent)}
 .con-email:hover::after{width:100%}
 .con-phone{margin-top:10px;font-family:'Space Mono',monospace;font-size:.76rem;color:var(--muted);letter-spacing:.08em}
-.soc-row{display:flex;justify-content:center;gap:36px;margin-top:52px;flex-wrap:wrap}
-.soc-link{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding-bottom:3px;transition:color .25s}
-.soc-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
-.soc-link:hover{color:var(--accent)}
-.soc-link:hover::after{width:100%}
+.soc-row{display:flex;justify-content:center;gap:28px;margin-top:52px;flex-wrap:wrap;align-items:center}
+.soc-icon{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--ac-mid);background:var(--ac-dim);color:var(--muted);text-decoration:none;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.soc-icon:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-2px)}
+.soc-icon svg{width:18px;height:18px;fill:currentColor}
 
 /* FOOTER */
 footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-size:.67rem;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.07em}
@@ -334,7 +378,11 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
 @media(max-width:1100px){#hero{grid-template-columns:1fr;gap:0}.hero-vis{display:none}}
 @media(max-width:900px){
   section,#coming,#jr{padding:90px 6%}
-  nav{padding:0 6%}.nav-links{gap:12px}.nav-links a{font-size:.6rem}
+  nav{padding:0 6%}
+  /* Hide desktop links, show hamburger */
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
   .hero-name{font-size:clamp(3.8rem,15vw,7rem)}
   .about-grid,.jr-grid{grid-template-columns:1fr;gap:52px}
   .rings{grid-template-columns:repeat(2,1fr);gap:36px}
@@ -345,8 +393,10 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
   .edu-track::before,.edu-dot{display:none}
   .cv-row{flex-direction:column;align-items:flex-start;gap:20px}
   .rv-vp{height:420px}
+  /* Overlay: full screen on mobile, header sits below nav bar */
   .ov-panel{width:100%}
-  .ov-body,.ov-head{padding-left:24px;padding-right:24px}
+  .ov-head{top:68px;padding-left:20px;padding-right:20px;padding-top:16px;padding-bottom:16px}
+  .ov-body{padding:24px 20px}
   .art-wrap{margin:0 -6%;padding:0 6%}
 }
 @media(max-width:600px){
@@ -355,6 +405,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
   footer{flex-direction:column;gap:12px;text-align:center}
   .fc{padding:36px 28px}.fc::after{font-size:8rem;right:18px}
   .cc{padding:36px 28px}
+  .ov-title{font-size:1.7rem}
 }
 
 /* LOGO - MO MONOGRAM FUSED WITH SCATTER PLOT */
@@ -377,6 +428,20 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
 .nav-logo:hover .logo-svg{filter:drop-shadow(0 0 5px var(--accent))}
 .f-logo svg{transition:filter .35s;cursor:default}
 .f-logo:hover svg{filter:drop-shadow(0 0 4px var(--accent))}
+
+/* ─── MOBILE HAMBURGER NAV ─── */
+.hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;cursor:pointer;background:var(--ac-dim);border:1px solid var(--ac-mid);border-radius:50%;flex-shrink:0}
+.hamburger span{display:block;width:16px;height:1.5px;background:var(--accent);border-radius:1px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+/* Mobile drawer */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:var(--bg-nav);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Space Mono',monospace;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--rule);width:200px;text-align:center;transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--accent)}
+.mobile-menu-footer{margin-top:40px;display:flex;align-items:center;gap:16px}
 </style>
 </head>
 <body>
@@ -434,12 +499,33 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
       <a href="#jr">Journey</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <button class="theme-btn" id="theme-toggle" aria-label="Toggle colour theme">
       <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
   </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <a href="#hero" class="active" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#projects" onclick="closeMobileMenu()">Work</a>
+  <a href="#coming" onclick="closeMobileMenu()">Lab</a>
+  <a href="#articles" onclick="closeMobileMenu()">Writing</a>
+  <a href="#jr" onclick="closeMobileMenu()">Journey</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <div class="mobile-menu-footer">
+    <button class="theme-btn" id="theme-toggle-mobile" aria-label="Toggle colour theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</div>
 
 <!-- OVERLAY -->
 <div id="overlay" role="dialog" aria-modal="true">
@@ -983,11 +1069,26 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
       </a>
     </p>
     <div class="soc-row">
-      <a href="https://linkedin.com/in/moyedele" target="_blank" rel="noopener" class="soc-link">LinkedIn</a>
-      <a href="https://github.com/deleolayinka" target="_blank" rel="noopener" class="soc-link">GitHub</a>
-      <a href="https://moyedele.medium.com/" target="_blank" rel="noopener" class="soc-link">Medium</a>
-      <a href="https://x.com/mrolayinka_?s=21&t=GQJwOcW8DqBJMCPDqQlJ0w" target="_blank" rel="noopener" class="soc-link">X</a>
-      <a href="https://instagram.com/mr.olayinka" target="_blank" rel="noopener" class="soc-link">Instagram</a>
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/moyedele" target="_blank" rel="noopener" class="soc-icon" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <!-- GitHub -->
+      <a href="https://github.com/deleolayinka" target="_blank" rel="noopener" class="soc-icon" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <!-- Medium (M logo) -->
+      <a href="https://moyedele.medium.com/" target="_blank" rel="noopener" class="soc-icon" aria-label="Medium">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+      <!-- X (Twitter) -->
+      <a href="https://x.com/mrolayinka_?s=21&t=GQJwOcW8DqBJMCPDqQlJ0w" target="_blank" rel="noopener" class="soc-icon" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.213 5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://instagram.com/mr.olayinka" target="_blank" rel="noopener" class="soc-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1207,6 +1308,38 @@ heroIO.observe(document.getElementById('hero'));
 /* ACTIVE NAV */
 var nls=document.querySelectorAll('.nav-links a');
 var navIO=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){nls.forEach(function(l){l.classList.remove('active');});var a=document.querySelector('.nav-links a[href="#'+x.target.id+'"]');if(a)a.classList.add('active');}});},{threshold:.35});
+
+/* HAMBURGER MENU */
+(function(){
+  var btn=document.getElementById('hamburger');
+  var menu=document.getElementById('mobile-menu');
+  var mobileTheme=document.getElementById('theme-toggle-mobile');
+  if(!btn||!menu)return;
+  function openMenu(){
+    btn.classList.add('open');btn.setAttribute('aria-expanded','true');
+    menu.classList.add('open');document.body.style.overflow='hidden';
+  }
+  function closeMobileMenuFn(){
+    btn.classList.remove('open');btn.setAttribute('aria-expanded','false');
+    menu.classList.remove('open');document.body.style.overflow='';
+  }
+  window.closeMobileMenu=closeMobileMenuFn;
+  btn.addEventListener('click',function(){
+    btn.classList.contains('open')?closeMobileMenuFn():openMenu();
+  });
+  // Sync mobile theme button with desktop
+  if(mobileTheme){
+    mobileTheme.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      localStorage.setItem('mo-theme',next);
+      updatePColor();
+    });
+  }
+  // Close on Escape
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMobileMenuFn();});
+})();
+
 document.querySelectorAll('section[id]').forEach(function(s){navIO.observe(s);});
 </script>
 </body>
