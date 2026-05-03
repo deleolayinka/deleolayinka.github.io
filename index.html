@@ -429,9 +429,9 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
 @media(max-width:600px){
   .hero-name{font-size:clamp(3.2rem,17vw,5rem)}
   .hero-stats{gap:0;flex-wrap:nowrap;justify-content:space-between;padding-top:24px;margin-top:40px}
-  .stat{flex:1;min-width:0}
+  .stat{flex:1;min-width:0;overflow:hidden}
   .stat-n{font-size:2rem}
-  .stat-l{font-size:.52rem;letter-spacing:.06em}
+  .stat-l{font-size:.48rem;letter-spacing:.03em;white-space:normal;word-break:break-word;line-height:1.3}
   footer{flex-direction:column;gap:12px;text-align:center}
   .fc{padding:76px 28px 36px}.fc::after{font-size:8rem;right:18px;top:14px}
   .cc{padding:36px 28px}
@@ -471,6 +471,14 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
 .cs-gate-input::placeholder{color:var(--cs-muted,var(--muted));opacity:.6}
 .cs-gate-btn{background:var(--accent);border:none;cursor:pointer;padding:13px 22px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;transition:opacity .2s}
 [data-theme="light"] .cs-gate-btn{color:#1A1714}
+[data-theme="light"] .cs-gate-title{color:#FAF0E6}
+[data-theme="light"] .cs-gate-sub{color:#C49B7A}
+[data-theme="light"] .cs-gate-icon{border-color:#E8A87C}
+[data-theme="light"] .cs-gate-icon svg{stroke:#E8A87C}
+[data-theme="light"] .cs-gate-input{color:#FAF0E6}
+[data-theme="light"] .cs-gate-input::placeholder{color:#A07860;opacity:1}
+[data-theme="light"] .cs-gate-form{border-color:rgba(232,168,124,.35);background:rgba(255,255,255,.04)}
+[data-theme="light"] .cs-gate-err{color:#e8806a}
 .cs-gate-btn:hover{opacity:.82}
 .cs-gate-err{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.06em;color:#e05c5c;opacity:0;transition:opacity .3s;height:16px}
 .cs-gate-err.show{opacity:1}
@@ -647,7 +655,7 @@ footer{padding:30px 8%;border-top:1px solid var(--rule);display:flex;justify-con
     <div class="reveal">
       <p class="about-lbl">Who I Am</p>
       <h2 class="about-h">A decade of turning<br><em>data into decisions.</em></h2>
-      <p class="about-p">I am a Data Scientist and BI Specialist with over a decade of academic and professional experience spanning machine learning, statistical modelling, and business intelligence across three countries and two continents. I believe data only matters when it changes something, and I have spent my career making sure it does.</p>
+      <p class="about-p">I am a Data Scientist and BI Specialist with over a decade of academic and professional experience spanning machine learning, statistical modelling, and business intelligence across three countries and three continents. I believe data only matters when it changes something, and I have spent my career making sure it does.</p>
       <p class="about-p">Born and raised in Nigeria, I developed a rigorous foundation in statistics at the University of Ilorin, earning both a first-class Bachelor of Science and a Distinction-grade Master of Science in Statistics. Driven by a desire to operate at the frontier of applied data science, I pursued a second postgraduate degree in Data Analytics at Aston University in Birmingham, UK, graduating with Merit in 2023.</p>
       <p class="about-p">My professional journey began at Nigeria Inter-Bank Settlement System (NIBSS) in Lagos, where I spent over four years building production ML systems for one of Africa's most critical financial infrastructure providers. A deep neural network I designed and deployed achieved 97.84% annual forecast accuracy on product volume prediction, enabling 100% service uptime year-round and eliminating 52% of avoidable resource expenditure. I also led a full organisation-wide BI transformation using Power BI and Tableau that improved stakeholder report acceptance by 95%.</p>
       <p class="about-p">Since relocating to Calgary in 2022, I have worked as a Data Scientist at Canadian Blood Services, where I build ML systems that directly support the national blood supply chain. My work spans NLP-powered clinical data translation, real-time diagnostic and predictive portals, Monte Carlo simulation frameworks, Mixed Integer Linear Programming for strategic clinic placement, and supervised ML models that increased donor appointment attendance by 20%. These are not research projects: they are production systems used daily to ensure Canadians have access to the blood products they need.</p>
