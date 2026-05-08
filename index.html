@@ -8,6 +8,7 @@
 <meta name="keywords" content="Moses Oyedele, Moses Olayinka Oyedele, Data Scientist Calgary, Business Intelligence Specialist, Machine Learning Engineer Canada, Power BI, Canadian Blood Services, NLP Healthcare, Monte Carlo Simulation, MILP, Healthcare Analytics, Python Data Scientist, R Statistical Modelling, SQL, Predictive Analytics Canada"/>
 <meta name="author" content="Moses Oyedele"/>
 <meta name="robots" content="index, follow"/>
+<link rel="icon" id="dyn-favicon" type="image/png" sizes="32x32"/>
 <link rel="canonical" href="https://deleolayinka.com/"/>
 <!-- Open Graph (LinkedIn, Facebook previews) -->
 <meta property="og:type" content="website"/>
@@ -1409,6 +1410,149 @@ heroIO.observe(document.getElementById('hero'));
   btn.addEventListener('click',check);
   inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
 })();
+
+
+/* ═══════════════════════════════════════════════════════
+   ANIMATED CANVAS FAVICON — MO MONOGRAM
+   Exact fused MO letterform from the site logo, scaled
+   to 32×32. Glowing breath effect synced to peakPulse
+   2.6 s period. Theme-aware, paused when tab is hidden.
+   ═══════════════════════════════════════════════════════ */
+(function(){
+  var PERIOD = 2600; /* ms — matches peakPulse 2.6s */
+  var FPS    = 12;
+  var FRAME  = 1000 / FPS;
+
+  /* Palettes — mirror site dark/light */
+  var DARK  = { bg:'#030810', ring:'rgba(201,168,76,0.65)', mo:'#c9a84c', glow:'201,168,76' };
+  var LIGHT = { bg:'#F5F1E8', ring:'rgba(201,79,44,0.55)',  mo:'#C94F2C', glow:'201,79,44'  };
+
+  function pal(){ return (document.documentElement.getAttribute('data-theme')||'dark')==='dark'?DARK:LIGHT; }
+
+  /* CSS ease-in-out (sine) */
+  function eio(t){ return 0.5-0.5*Math.cos(Math.PI*t); }
+
+  /* Rounded-rect path */
+  function rrect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);   ctx.arcTo(x+w,y,  x+w,y+r,  r);
+    ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+    ctx.lineTo(x+r,y+h);   ctx.arcTo(x,y+h,  x,y+h-r,  r);
+    ctx.lineTo(x,y+r);     ctx.arcTo(x,y,    x+r,y,    r);
+    ctx.closePath();
+  }
+
+  /*
+   * MO monogram — scaled from the site's SVG viewBox 0 0 92 33.
+   *
+   * Original logo (nav SVG):
+   *   M: polyline (2,28)(2,6)(10,17)(16,6)  — 3-stroke, no right descender
+   *   O: circle cx=26 cy=17 r=11
+   *   O's left edge (x=15) overlaps M's right arm (x=16) → fused.
+   *
+   * Fitting the MO glyph (x:2→37, y:6→28 = 35×22 units) into
+   * a 22×14 px area centered in the 32×32 canvas (5px margin each side).
+   * Uniform scale S = 22/35 ≈ 0.629.
+   * Offsets so glyph centre (19.5,17) maps to canvas centre (16,16):
+   *   ox = 16 - 19.5*S = 16 - 12.27 = 3.73
+   *   oy = 16 - 17*S   = 16 - 10.69 = 5.31
+   *
+   * Transformed points:
+   *   M[0] (2,28)  → (4.99, 23.93)
+   *   M[1] (2,6)   → (4.99,  9.09)
+   *   M[2] (10,17) → (10.02, 16.01) ← midpoint / apex
+   *   M[3] (16,6)  → (13.79,  9.09) ← where M arm meets O top
+   *   O cx=26 cy=17 r=11 → cx=20.09 cy=16.01 r=6.92
+   *
+   * Stroke width: 2.5 * 0.629 ≈ 1.57 → use 1.6
+   */
+  var S  = 0.629;
+  var OX = 3.73, OY = 5.31;
+  function tx(x){ return x*S+OX; }
+  function ty(y){ return y*S+OY; }
+
+  var M_PTS = [[2,28],[2,6],[10,17],[16,6]];
+  var O_CX  = tx(26), O_CY = ty(17), O_R = 11*S;
+  var SW    = 1.6; /* stroke width */
+
+  var cv  = document.createElement('canvas');
+  cv.width = cv.height = 32;
+  var ctx = cv.getContext('2d');
+  var lnk = document.getElementById('dyn-favicon');
+  var t0  = performance.now();
+  var raf = null, lastF = 0;
+
+  function draw(now){
+    var P = pal();
+    var elapsed = now - t0;
+    var cycle = (elapsed % PERIOD) / PERIOD;
+    var raw   = cycle < 0.5 ? cycle*2 : (1-cycle)*2;
+    var pulse = eio(raw); /* 0→1→0, ease-in-out */
+
+    /* Derived animation values */
+    var glow  = 1 + pulse*7;    /* shadowBlur 1→8  */
+    var alpha = 0.6 + pulse*0.4; /* opacity 0.6→1.0 */
+
+    ctx.clearRect(0,0,32,32);
+
+    /* ── Background rounded-rect ── */
+    rrect(ctx,0.75,0.75,30.5,30.5,6);
+    ctx.fillStyle = P.bg;
+    ctx.fill();
+    ctx.strokeStyle = P.ring;
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    /* ── MO monogram with breathing glow ── */
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.shadowColor  = 'rgba('+P.glow+','+( 0.3+pulse*0.5 ).toFixed(2)+')';
+    ctx.shadowBlur   = glow;
+    ctx.strokeStyle  = P.mo;
+    ctx.lineWidth    = SW;
+    ctx.lineCap      = 'round';
+    ctx.lineJoin     = 'round';
+
+    /* M — 3-stroke, no right descender */
+    ctx.beginPath();
+    M_PTS.forEach(function(pt,i){
+      i===0 ? ctx.moveTo(tx(pt[0]),ty(pt[1])) : ctx.lineTo(tx(pt[0]),ty(pt[1]));
+    });
+    ctx.stroke();
+
+    /* O — full circle whose left edge fuses with M's right arm */
+    ctx.beginPath();
+    ctx.arc(O_CX, O_CY, O_R, 0, Math.PI*2);
+    ctx.stroke();
+
+    ctx.restore();
+
+    /* Push to favicon */
+    lnk.href = cv.toDataURL('image/png');
+  }
+
+  function loop(now){
+    raf = requestAnimationFrame(loop);
+    if(now-lastF < FRAME) return;
+    lastF = now;
+    draw(now);
+  }
+
+  function start(){ if(!raf) raf=requestAnimationFrame(loop); }
+  function pause(){ if(raf){cancelAnimationFrame(raf);raf=null;} }
+
+  document.addEventListener('visibilitychange',function(){
+    document.hidden ? pause() : start();
+  });
+
+  new MutationObserver(function(){
+    draw(performance.now());
+  }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  start();
+})();
+
 
 /* ACTIVE NAV */
 var nls=document.querySelectorAll('.nav-links a');
